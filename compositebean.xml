@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.4.2_13" class="java.beans.XMLDecoder"> 
+ <object class="com.tor.util.serializ.CompositeBean"> 
+  <void property="s"> 
+   <object class="com.tor.util.serializ.SimpleBean"> 
+    <void property="name"> 
+     <string>Nested</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 

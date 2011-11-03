@@ -1,0 +1,4 @@
+Java|http://www.rgagnon/javahowto.htm
+PowerBuilder|http://www.rgagnon/pbhowto.htm
+Javascript|http://www.rgagnon/jshowto.htm
+VBScript|http://www.rgagnon/vbshowto.htm

@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <users id="1" fio="Jim" birthday="1999-01-01" sex="m"/>
+  <users id="2" fio="Tom" birthday="1989-01-01" sex="m"/>
+  <users id="3" fio="Marta" birthday="1959-01-01" sex="f"/>
+</dataset>

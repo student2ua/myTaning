@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menubar name="mainMenu">
+	<menu name="file" text="Файл" mnemonic="Ф">
+		<menuitem name="create" text="Создать"  accelerator="control N"/>
+		<menuitem name="open" text="Открыть" mnemonic="О" enabled="false"/>
+		<menuitem name="close" text="Закрыть"  enabled="false"/>
+		<menuitem name="separator"/>
+		<menuitem name="javax.swing.Action" class="obuchenie.xmlmenu.exemple.DemoActions"/>
+		<menu name="print" text="Печать" mnemonic="П">
+			<menuitem name="preview" text="Предпросмотр" mnemonic="с"/>
+		</menu>
+		<menuitem name="separator"/>
+		<menuitem name="exit" text="Выход" mnemonic="х" accelerator="alt X"/>
+	</menu>
+</menubar>

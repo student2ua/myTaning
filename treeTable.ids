@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="h2" product="" version="" jdbc-version="" driver-version="" uuid="780c7dc0-0bbb-4c12-8789-9d37601237d6">
+    <jdbc-driver>org.h2.Driver</jdbc-driver>
+    <jdbc-url>jdbc:h2:~/test</jdbc-url>
+    <user-name>sa</user-name>
+    <libraries>
+      <library>
+        <url>jar://E:/all_lib/db/postgres/postgresql-9.0-801.jdbc3.jar!/</url>
+      </library>
+      <library>
+        <url>jar://E:/all_lib/db/oracle/runtime12.zip!/</url>
+      </library>
+      <library>
+        <url>jar://E:/all_lib/db/oracle/classes12.zip!/</url>
+      </library>
+      <library>
+        <url>jar://E:/all_lib/db/h2/h2-1.2.147.jar!/</url>
+      </library>
+    </libraries>
+  </data-source>
+</component>
