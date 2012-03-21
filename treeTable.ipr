@@ -33,12 +33,10 @@
       <file url="file://$PROJECT_DIR$/src/com/tor/swing/table/DnDTable.java" />
       <file url="file://$PROJECT_DIR$/src/obuchenie/xmlmenu/exemple/MyXMLTestCase.java" />
       <directory url="file://$PROJECT_DIR$/src/obuchenie/javaee" includeSubdirectories="true" />
-      <file url="file://$PROJECT_DIR$/src/obuchenie/jmx_exemple/SimpleAgent2.java" />
-      <file url="file://$PROJECT_DIR$/src/obuchenie/jmx_exemple/SimpleAgent.java" />
       <file url="file://$PROJECT_DIR$/src/com/tor/commons/lang/LangsTest.java" />
       <file url="file://$PROJECT_DIR$/src/com/tor/swing/table/TableRowRenderingTip.java" />
       <file url="file://$PROJECT_DIR$/src/com/tor/db/ExamplePooledConnection.java" />
-      <file url="file://$PROJECT_DIR$/src/com/tor/algoritms/TimSort.java" />
+      <file url="file://$PROJECT_DIR$/src/obuchenie/web/RssServlet.java" />
     </excludeFromCompile>
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
@@ -56,6 +54,9 @@
       <entry name="?*.tld" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
+  </component>
+  <component name="CopyrightManager" default="">
+    <module2copyright />
   </component>
   <component name="DataSourceManagerImpl" compressed="false" />
   <component name="DependenciesAnalyzeManager">
@@ -275,7 +276,7 @@
     <file url="file://$PROJECT_DIR$/src/obuchenie/dbunit/habr/UserTest.java" dialect="SQL92" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">

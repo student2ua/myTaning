@@ -64,9 +64,9 @@ public class IndicatorCellRenderer extends JProgressBar implements TableCellRend
         int i = 0;
         int n = limitColors.size();
         limitValues = new int[n];
-        Enumeration enum = limitColors.keys();
-        while (enum.hasMoreElements()) {
-            limitValues[i++] = ((Integer) enum.nextElement()).intValue();
+        Enumeration enummerat = limitColors.keys();
+        while (enummerat.hasMoreElements()) {
+            limitValues[i++] = ((Integer) enummerat.nextElement()).intValue();
         }
         sort(limitValues);
     }
