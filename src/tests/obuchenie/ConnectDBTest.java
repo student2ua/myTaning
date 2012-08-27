@@ -1,4 +1,4 @@
-package tests;
+package obuchenie;
 
 import junit.framework.TestCase;
 

@@ -1,5 +1,9 @@
-package com.tor.mock_test;
+package tests.com.tor.mock_test;
 
+import com.tor.mock_test.Collaborator;
+import com.tor.mock_test.ICollaborator;
+import com.tor.mock_test.ServiceClass;
+import com.tor.mock_test.ServiceClass_CNA;
 import org.apache.log4j.Logger;
 import org.jmock.Mock;
 import org.jmock.cglib.MockObjectTestCase;

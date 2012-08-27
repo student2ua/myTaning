@@ -1,0 +1,98 @@
+<!--http://habrahabr.ru/post/144104/-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>habrahabr.ru/post/144104/</title>
+    <style type="text/css">
+        input[type="checkbox"],
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="checkbox"] + label,
+        input[type="radio"] + label {
+            font: 18px bold;
+            color: #444;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] + label::before,
+        input[type="radio"] + label::before {
+            content: "";
+            display: inline-block;
+            height: 18px;
+            width: 18px;
+            margin: 0 5px 0 0;
+            background-image: url(uniformjs.com/images/sprite.png);
+            background-repeat: no-repeat;
+        }
+
+        input[type="checkbox"] + label::before {
+            background-position: -38px -260px;
+        }
+
+        input[type="radio"] + label::before {
+            background-position: 0px -279px;
+        }
+
+        input[type="checkbox"]:checked + label::before {
+            background-position: -114px -260px;
+        }
+
+        input[type="radio"]:checked + label::before {
+            background-position: -108px -279px;
+        }
+
+        input[type="checkbox"]:disabled + label::before {
+            background-position: -152px -260px;
+        }
+
+        input[type="checkbox"]:checked:disabled + label::before {
+            background-position: -171px -260px;
+        }
+
+        input[type="radio"]:disabled + label::before {
+            background-position: -144px -279px;
+        }
+
+        input[type="radio"]:checked:disabled + label::before {
+            background-position: -162px -279px;
+        }
+    </style>
+</head>
+
+<body>
+<ul>
+    <li>
+        <input id="cfirst" type="checkbox" name="first" checked hidden/>
+        <label for="cfirst">Checked checkbox</label>
+    </li>
+    <li>
+        <input id="csecond" type="checkbox" name="second" hidden/>
+        <label for="csecond">Unchecked checkbox</label>
+    </li>
+    <li>
+        <input id="cthird" type="checkbox" name="third" hidden disabled/>
+        <label for="cthird">Disabled checkbox</label>
+    </li>
+    <li>
+        <input id="clast" type="checkbox" name="last" checked hidden disabled/>
+        <label for="clast">Disabled checked checkbox</label>
+    </li>
+</ul>
+<ul>
+    <li>
+        <input id="rfirst" type="radio" name="radio" checked hidden/>
+        <label for="rfirst">Checked radio</label>
+    </li>
+    <li>
+        <input id="rsecond" type="radio" name="radio" hidden/>
+        <label for="rsecond">Unchecked radio</label>
+    </li>
+    <li>
+        <input id="rthird" type="radio" name="radio" hidden disabled/>
+        <label for="rthird">Disabled radio</label>
+    </li>
+</ul>
+</body>
+</html>

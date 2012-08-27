@@ -1,4 +1,4 @@
-package tests;
+package obuchenie.data;
 
 import obuchenie.data.DataToTest;
 import obuchenie.data.Person;

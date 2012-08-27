@@ -1,6 +1,8 @@
-package com.tor.mock_test;
+package tests.com.tor.mock_test;
 
 import com.agical.rmock.extension.junit.RMockTestCase;
+import com.tor.mock_test.Collaborator_NDC;
+import com.tor.mock_test.ServiceClass_CNA;
 
 /**
  * Created by IntelliJ IDEA.

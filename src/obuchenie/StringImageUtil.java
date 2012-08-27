@@ -14,7 +14,7 @@ import java.io.File;
  * User: tor
  * Date: 09.11.2010
  * Time: 17:18:23
- * To change this template use File | Settings | File Templates.
+ * Создание надписи в картинке jpg
  */
 public class StringImageUtil {
 

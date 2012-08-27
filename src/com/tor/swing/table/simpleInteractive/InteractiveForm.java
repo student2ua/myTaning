@@ -6,6 +6,7 @@ package com.tor.swing.table.simpleInteractive;
  * Date: 01.11.11
  * Time: 17:37
  * http://www.javalobby.org/articles/jtable/
+ * переход табом с созданием новой сторки
  */
 import java.awt.event.WindowAdapter;
  import java.awt.event.WindowEvent;

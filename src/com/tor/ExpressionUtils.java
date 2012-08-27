@@ -27,11 +27,15 @@ public class ExpressionUtils {
 
     static {
         MAIN_MATH_OPERATIONS = new HashMap();
-        MAIN_MATH_OPERATIONS.put("*", new Integer(1));
-        MAIN_MATH_OPERATIONS.put("/", new Integer(1));
-        MAIN_MATH_OPERATIONS.put("+", new Integer(2));
-        MAIN_MATH_OPERATIONS.put("-", new Integer(2));
+        MAIN_MATH_OPERATIONS.put("*", new Integer(2));
+        MAIN_MATH_OPERATIONS.put("/", new Integer(2));
+        MAIN_MATH_OPERATIONS.put("+", new Integer(3));
+        MAIN_MATH_OPERATIONS.put("-", new Integer(3));
+        for (Function function : Function.values()) {
+            MAIN_MATH_OPERATIONS.put(function.name(), 1);
+        }
     }
+
 
     /**
      * Преобразует выражение из инфиксной нотации в обратную польскую нотацию (ОПН) по алгоритму <i>Сортировочная
@@ -45,19 +49,17 @@ public class ExpressionUtils {
      * @param operations   операторы, использующиеся в выражении (ассоциированные, либо лево-ассоциированные).
      *                     Значениями карты служат приоритеты операции (самый высокий приоритет - 1). Например, для 5
      *                     основных математических операторов карта будет выглядеть так:
-     *                     <pre>
-     *                                                                  *   ->   1
-     *                                                                  /   ->   1
-     *                                                                  +   ->   2
-     *                                                                  -   ->   2
-     *                                                             </pre>
+     *                     <pre> *   ->   1
+     *                          /   ->   1
+     *                          +   ->   2
+     *                          -   ->   2
+     *                     </pre>
      *                     Приведенные операторы определены в константе {@link #MAIN_MATH_OPERATIONS}.
      * @param leftBracket  открывающая скобка.
      * @param rightBracket закрывающая скобка.
      * @return преобразованное выражение в ОПН.
      */
-    public static String sortingStation(String expression, Map operations, String leftBracket,
-                                        String rightBracket) {
+    public static String sortingStation(String expression, Map operations, String leftBracket, String rightBracket) {
         if (expression == null || expression.length() == 0)
             throw new IllegalStateException("Expression isn't specified.");
         if (operations == null || operations.isEmpty())
@@ -68,7 +70,7 @@ public class ExpressionUtils {
         Stack stack = new Stack();
 
         // Удаление пробелов из выражения.
-        expression = expression.replaceAll(" ", "");
+        expression = expression.trim().toUpperCase().replaceAll(" ", "");
 
         // Множество "символов", не являющихся операндами (операции и скобки).
         Set operationSymbols = new HashSet(operations.keySet());
@@ -84,7 +86,7 @@ public class ExpressionUtils {
             String nextOperation = "";
             // Поиск следующего оператора или скобки.
             String operation = null;
-            for (Iterator it = operationSymbols.iterator(); it.hasNext();) {
+            for (Iterator it = operationSymbols.iterator(); it.hasNext(); ) {
                 operation = (String) it.next();
                 int i = expression.indexOf(operation, index);
                 if (i >= 0 && i < nextOperationIndex) {
@@ -155,14 +157,15 @@ public class ExpressionUtils {
      *
      * @param expression выражение в инфиксной форме.
      * @param operations операторы, использующиеся в выражении (ассоциированные, либо лево-ассоциированные).
+     *
      *                   Значениями карты служат приоритеты операции (самый высокий приоритет - 1). Например, для 5
      *                   основных математических операторов карта будет выглядеть так:
-     *                   <pre>
-     *                                                            *   ->   1
-     *                                                            /   ->   1
-     *                                                            +   ->   2
-     *                                                            -   ->   2
-     *                                                       </pre>
+     * <pre>
+     * *   ->   1
+     * /   ->   1
+     * +   ->   2
+     * -   ->   2
+     * </pre>
      *                   Приведенные операторы определены в константе {@link #MAIN_MATH_OPERATIONS}.
      * @return преобразованное выражение в ОПН.
      */
@@ -184,26 +187,36 @@ public class ExpressionUtils {
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken();
             // Операнд.
-            if (!MAIN_MATH_OPERATIONS.keySet().contains(token)) {
+            if (!MAIN_MATH_OPERATIONS.keySet().contains(token.toUpperCase())) {
                 stack.push(new BigDecimal(token));
             } else {
                 BigDecimal operand2 = (BigDecimal) stack.pop();
                 BigDecimal operand1 = (BigDecimal) (stack.empty() ? new BigDecimal(0) : stack.pop());
-                if (token.equals("*")) {
+                if ("*".equals(token)) {
                     stack.push(operand1.multiply(operand2));
-                } else if (token.equals("/")) {
+                } else if ("/".equals(token)) {
 
                     stack.push((BigDecimal) (operand1.divide(operand2, BigDecimal.ROUND_UNNECESSARY)));
-                } else if (token.equals("+")) {
+                } else if ("+".equals(token)) {
                     stack.push(operand1.add(operand2));
-                } else if (token.equals("-")) {
+                } else if ("-".equals(token)) {
                     stack.push(operand1.subtract(operand2));
+                } else if (isFunctions(token)) {
+                    stack.push(Function.valueOf(token).calc(operand2, operand1));
+
                 }
             }
         }
         if (stack.size() != 1)
             throw new IllegalArgumentException("Expression syntax error.");
         return (BigDecimal) stack.pop();
+    }
+
+    private static boolean isFunctions(String s) {
+        for (Function f : Function.values()) {
+            if (f.name().equalsIgnoreCase(s)) return true;
+        }
+        return false;
     }
 
     /**
@@ -224,6 +237,27 @@ public class ExpressionUtils {
         String rpn = sortingStation(expression, MAIN_MATH_OPERATIONS);
         System.out.println("Обратная польская нотация: " + rpn);
         System.out.println("\tРезультат " + calculateExpression(expression));
+    }
+    private static final String[] FUNCTIONS = {"abs", "acos", "arg", "asin", "atan", "conj", "cos", "cosh", "exp", "imag", "log", "neg", "pow", "real", "sin", "sinh", "sqrt", "tan", "tanh"};
+
+    public static enum Function {
+        ABS {
+            @Override
+            public BigDecimal calc(BigDecimal... o) {
+                double i = o[0].doubleValue();
+                return BigDecimal.valueOf(Math.abs(i));
+            }
+        },
+        POW {
+            @Override
+            public BigDecimal calc(BigDecimal... o) {
+                double fist = o[0].doubleValue();
+                double second = o[1].doubleValue();
+                return BigDecimal.valueOf(Math.pow(fist, second));
+            }
+        };
+
+        public abstract BigDecimal calc(BigDecimal... o);
     }
 }
 

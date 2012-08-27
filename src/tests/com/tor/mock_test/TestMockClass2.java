@@ -1,4 +1,4 @@
-package com.tor.mock_test;
+package tests.com.tor.mock_test;
 
 import org.apache.log4j.Logger;
 import org.jmock.Mock;

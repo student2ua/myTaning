@@ -1,0 +1,70 @@
+<!--http://habrahabr.ru/post/136592/-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <link rel="stylesheet" href="path/to/stylesheet.css"/>
+    <script src="path/to/script.js"></script>
+</head>
+<body>
+
+<header>
+    3000 км над землёй.
+    <hgroup>
+        <h1> Пфф... </h1>
+
+        <h2> Как я провёл это лето. </h2>
+    </hgroup>
+</header>
+<footer>
+    -3000 км под. Под землёй.
+</footer>
+<!--добавить заголовок к нашему изображению-->
+<figure>
+    <img src="path/to/image" alt="Не видно? Включите просмотр изображений в настройках!"/>
+    <figcaption>
+        <p>Здесь изображено что-то очень интересное.</p>
+    </figcaption>
+</figure>
+
+<p class=myClass id=someId>Что, чёрт возьми, вы здесь делаете?</p>
+
+<h2> To-Do List </h2>
+<ul contenteditable="true">
+    <li> Проснуться.</li>
+    <li> Выпить кофе.</li>
+    <li> Пойти куда-нибудь наконец!</li>
+</ul>
+
+<form action="" method="get">
+    <label for="email">Email:</label>
+    <input id="email" name="email" type="email" placeholder="Здесь можно что-то написать!"/>
+    <button type="submit"> Submit Form</button>
+</form>
+
+<form method="post" action="">
+    <label for="someInput">Ваше имя: </label>
+    <input type="text" id="someInput" name="someInput" placeholder="Bill" required>
+    <button type="submit">Оке</button>
+</form>
+
+<form action="register.rb" method="post">
+    <label for="username">Введите имя пользователя: </label>
+    <input type="text"
+           name="username"
+           placeholder="Введите имя пользователя..."
+           pattern="[A-Za-z]{6,16}"
+           required>
+    <button type="submit">Регистрация</button>
+</form>
+mark {
+    border-radius: 15px;
+    background: silver;
+    color: white;
+    font-family: Tahoma;
+    padding: 5px;
+}
+<mark>Хе-хе! НЛО было здесь. И ему здесь понравилось.</mark>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package obuchenie.dbunit.habr;
 
 import junit.framework.TestCase;
+import obuchenie.dbunit.habr.User;
 import org.dbunit.Assertion;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
