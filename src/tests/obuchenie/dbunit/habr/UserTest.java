@@ -12,6 +12,8 @@ import org.dbunit.dataset.filter.DefaultColumnFilter;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.h2.H2DataTypeFactory;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -30,11 +32,13 @@ public class UserTest extends TestCase {
         instantiate();
     }
 
-    // @Before
+    @Before
     public void instantiate() throws Exception {
         //Creating databse server instance
 //        tester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:~/test", "sa", "");//enbeded
-        tester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:tcp://localhost/~/test", "sa", "");
+
+        tester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:/data/test;AUTO_SERVER=TRUE", "sa", "");
+       // tester = new JdbcDatabaseTester("org.h2.Driver", "jdbc:h2:tcp://localhost/~/test", "sa", "");
 //        tester = new JdbcDatabaseTester("org.hsqldb.jdbcDriver", "jdbc:hsqldb:mem:" + UUID.randomUUID().toString(), "sa", "");
 
         //Creating tables
@@ -62,7 +66,7 @@ public class UserTest extends TestCase {
         tester.onSetup();
     }
 
-    //  @Test
+     @Test
     public void testLogRequestStringTest() throws Exception {
         System.out.println("UserTest.testLogRequestStringTest");
         assertNotNull(tester);
@@ -82,7 +86,7 @@ public class UserTest extends TestCase {
         assertNotNull(flatXmlDataSetBuilder);
         ITable template = flatXmlDataSetBuilder.getTable("tokens");
         assertNotNull(template);
-        System.out.print(""+tester.getConnection().createDataSet().getTable("tokens"));
+        System.out.print("tester.getConnection().createDataSet().getTable(\"tokens\")");
         ITable actual = DefaultColumnFilter.includedColumnsTable(tester.getConnection().createDataSet().getTable("tokens"), template.getTableMetaData().getColumns());
         Assertion.assertEquals(template, actual);
     }
