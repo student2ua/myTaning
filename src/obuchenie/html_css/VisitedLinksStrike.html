@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visited links strike out with CSS</title>
+</head>
+<style type="text/css">
+    .block {
+        font-family: 'Georgia', Times New Roman, Times, serif;
+        font-size: 40px;
+    }
+
+    .block a {
+        color: #222C39;
+        text-decoration: none;
+    }
+
+    .block a:hover {
+        color: #222C39;
+        text-decoration: none;
+    }
+
+    .block a:visited {
+        text-decoration: line-through;
+        opacity: .25;
+        filter: alpha(opacity = 25);
+    }
+
+</style>
+<body>
+<div class="block">
+    <a href="link-1"> Title-1 </a><br/>
+    <a href="link-2"> Title-2 </a><br/>
+    <a href="link-3"> Title-3 </a><br/>
+</div>
+</body>
+</html>
