@@ -15,6 +15,7 @@ import java.util.Vector;
  * User: tor
  * Date: 09.12.2009
  * Time: 17:46:39
+ *
  * @version jdk>1.5
  */
 public class DnDTable extends JTable {
@@ -36,8 +37,8 @@ public class DnDTable extends JTable {
 
     private class ReorderHandler extends TransferHandler {
 
-     //   @Override
-       // @SuppressWarnings({"unchecked", "unchecked"})
+        //   @Override
+        // @SuppressWarnings({"unchecked", "unchecked"})
         public boolean importData(TransferSupport support) {
             int dropIndex = getDropLocation().getRow();
             int insertionAdjustment = 0;
@@ -79,7 +80,7 @@ public class DnDTable extends JTable {
 
                     SwingUtilities.invokeLater(new Runnable() {
 
-                    //    @Override
+                        @Override
                         public void run() {
                             DnDTable.this.clearSelection();
                         }
@@ -91,7 +92,7 @@ public class DnDTable extends JTable {
 
                     SwingUtilities.invokeLater(new Runnable() {
 
-                      //  @Override
+                        @Override
                         public void run() {
                             DnDTable.this.clearSelection();
                             dragTable.clearSelection();
@@ -104,12 +105,12 @@ public class DnDTable extends JTable {
             return false;
         }
 
-      //  @Override
+        @Override
         public int getSourceActions(JComponent c) {
             return TransferHandler.MOVE;
         }
 
-      //  @Override
+        @Override
         protected Transferable createTransferable(JComponent c) {
             int[] rows = DnDTable.this.getSelectedRows();
             Vector[] data = new Vector[rows.length];
@@ -122,7 +123,7 @@ public class DnDTable extends JTable {
             return new DTableData(DnDTable.this, data);
         }
 
-       // @Override
+        // @Override
         public boolean canImport(TransferSupport support) {
             if (!support.isDrop() || !support.isDataFlavorSupported(DTable_Flavor)) {
                 return false;
@@ -130,7 +131,7 @@ public class DnDTable extends JTable {
             return true;
         }
 
-     //   @Override
+        @Override
         public Icon getVisualRepresentation(Transferable t) {
             return super.getVisualRepresentation(t);
         }

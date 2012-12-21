@@ -59,11 +59,11 @@ public class AuthTicket {
     public void setTicket(String ticket) {
         try {
             Cipher cipher = Cipher.getInstance(CIPHER);
-            cipher.init(Cipher.DECRYPT_MODE,new SecretKeySpec(KEY,ALGORITM));
-            ByteBuffer byteData= ByteBuffer.wrap(cipher.doFinal (hexStringToByte(ticket)));
-            this.ticket=ticket;
-            this.sysUserId=byteData.getLong(0);
-            this.timestamp=byteData.getLong(8);
+            cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(KEY, ALGORITM));
+            ByteBuffer byteData = ByteBuffer.wrap(cipher.doFinal(hexStringToByte(ticket)));
+            this.ticket = ticket;
+            this.sysUserId = byteData.getLong(0);
+            this.timestamp = byteData.getLong(8);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
 //             log.error(e);
@@ -71,14 +71,14 @@ public class AuthTicket {
             e.printStackTrace();
 //             log.error(e);
         } catch (InvalidKeyException e) {
-e.printStackTrace();
+            e.printStackTrace();
 //            log.error(e);
         } catch (IllegalBlockSizeException e) {
-e.printStackTrace();
+            e.printStackTrace();
             //log.error(e);
         } catch (BadPaddingException e) {
 //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-           // log.error(e);
+            // log.error(e);
         }
     }
 
@@ -116,11 +116,12 @@ e.printStackTrace();
         char[] a = {hexDigit[(b >> 4) & 0x0f], hexDigit[b & 0x0f]};
         return new String(a);
     }
-     public static byte[] hexStringToByte(String hex) {
-    byte[] bts = new byte[hex.length() / 2];
-    for (int i = 0; i < bts.length; i++) {
-      bts[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+
+    public static byte[] hexStringToByte(String hex) {
+        byte[] bts = new byte[hex.length() / 2];
+        for (int i = 0; i < bts.length; i++) {
+            bts[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
+        }
+        return bts;
     }
-    return bts;
-  }
 }
