@@ -5,7 +5,7 @@ package com.tor.pattens.visitor.simplePizza;
  * User: tor
  * Date: 09.04.2010
  * Time: 16:52:31
- * To change this template use File | Settings | File Templates.
+ * пиццу - съесть на месте, забрать с собой или заказать доставку
  */
 public interface Visitor {
     public void visit(Pizza pizza);

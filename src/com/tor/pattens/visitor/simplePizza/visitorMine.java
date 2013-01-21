@@ -14,13 +14,13 @@ import java.util.List;
  * User: tor
  * Date: 09.04.2010
  * Time: 17:35:26
- * To change this template use File | Settings | File Templates.
+ * отделяем стоимость пиццы от стоимости доставки
  */
 public class visitorMine {
     private static final Logger log = Logger.getLogger(visitorMine.class);
 
     public static void main(String[] args) {
-        List pizzaList = new ArrayList();
+        List<Pizza> pizzaList = new ArrayList<Pizza>();
         pizzaList.add(new PopJohn());
         pizzaList.add(new PizzaHut());
         pizzaList.add(new GodFather());
