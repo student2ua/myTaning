@@ -1,7 +1,5 @@
 package com.tor.reflection.infoofclass;
 
-import org.apache.log4j.Logger;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -21,7 +19,6 @@ import java.lang.reflect.Modifier;
  * getMethods(), getFields() возвращают все public элементы текущего и родительских классов.
  */
 public class Main {
-    private static final Logger log = Logger.getLogger(Main.class);
 
     public static void main(String[] args) throws NoSuchFieldException, NoSuchMethodException {
         infoPointClass();
@@ -44,7 +41,11 @@ public class Main {
 
     private static void infoPointClass() {
         Class clazz = Point.class;
-        System.out.println("clazz = " + clazz.getName());
+        System.out.println("clazz { clazz.getName()=" + clazz.getName() +
+                ", clazz.getCanonicalName()=" + clazz.getCanonicalName() +
+                ", clazz.getSimpleName()=" + clazz.getSimpleName() +
+                ", clazz.getPackage()=" + clazz.getPackage() + " }");
+
 
         Class superClass = clazz.getSuperclass();
         System.out.println("superClass = " + superClass.getName());

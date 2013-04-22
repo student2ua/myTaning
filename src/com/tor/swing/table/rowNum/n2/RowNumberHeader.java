@@ -38,20 +38,20 @@ public class RowNumberHeader extends JTable {
         }
 
         public int getColumnCount() {
-            return  mainTable.getColumnCount()+1;
+            return mainTable.getColumnCount() + 1;
         }
 
         public Object getValueAt(int row, int column) {
-            if(column==0) {
+            if (column == 0) {
                 return new Integer(row + 1);
-            } else return mainTable.getModel().getValueAt(row,column-1);
+            } else return mainTable.getModel().getValueAt(row, column - 1);
         }
 
     }
 
     public static void main(String[] a) {
         JFrame f = new JFrame();
-        f.getContentPane().add(new RowNumberHeader(new JTable(3, 4)));
+        f.getContentPane().add(new RowNumberHeader(new JTable(new Object[][]{{11, 12, 13}, {21, 22, 23}}, new String[]{"A", "B", "C"})));
         f.setSize(300, 300);
         f.setVisible(true);
     }

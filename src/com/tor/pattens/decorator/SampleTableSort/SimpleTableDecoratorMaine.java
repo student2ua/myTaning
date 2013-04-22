@@ -32,7 +32,7 @@ public class SimpleTableDecoratorMaine extends JFrame {
     public SimpleTableDecoratorMaine() {
 
         setTitle("SimpleTableDecorator");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         table.setModel((TableModel) tableFilterDecorator);
 
         getContentPane().add(panel);

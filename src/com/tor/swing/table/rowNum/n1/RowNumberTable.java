@@ -158,8 +158,8 @@ public class RowNumberTable extends JTable
                 new String[][]{
                         {"abc", "abcdefg", "abcdefghijk"
                         }, {"abcdefghijklmno", "absdefghi", "abc"
-                        }, {"abcde", "abcdefghijklmnopqrstuvwxyz", "abcdefgjijklmn"
-                        },
+                }, {"abcde", "abcdefghijklmnopqrstuvwxyz", "abcdefgjijklmn"
+                },
                 },
                 new String[]{
                         "a1", "b2", "c3"
@@ -176,7 +176,7 @@ public class RowNumberTable extends JTable
         frame.setContentPane(scrollPane);
         frame.setSize(512, 384);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
