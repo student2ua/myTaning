@@ -3,7 +3,6 @@ package obuchenie;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import javax.naming.Context;
-import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -19,6 +18,8 @@ import java.util.Hashtable;
  * $Author::            $:  Author of last commit
  * $Date::              $:  Date of last commit
  * http://www.tikalk.com/java/forums/jmx-connection-jboss
+ * With the default configuration, the JMX Service URL to connecto to the server is
+ * service:jmx:rmi://[host]/jndi/rmi://[host]:1090/jmxconnector
  */
 public class JMXConnect2JBoss {
     public static void main(String[] args) throws Exception {
@@ -40,5 +41,13 @@ public class JMXConnect2JBoss {
         ObjectName name = ObjectName.getInstance("jboss.system", "type", "Server");
         Boolean started = (Boolean) conn.getAttribute(name, "Started");
 
+    }
+
+    private static String getJmxHostname() {
+        return "DEV";
+    }
+
+    private static Integer getJmxPort() {
+        return 1090;
     }
 }
