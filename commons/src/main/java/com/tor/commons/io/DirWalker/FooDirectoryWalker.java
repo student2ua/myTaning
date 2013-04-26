@@ -1,4 +1,4 @@
-package com.tor.commons.io;
+package com.tor.commons.io.DirWalker;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.filefilter.FileFilterUtils;
