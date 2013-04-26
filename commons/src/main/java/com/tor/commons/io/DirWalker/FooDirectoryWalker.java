@@ -4,7 +4,6 @@ import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -18,7 +17,6 @@ import java.util.Collection;
  * For example, if you wanted all directories which are not hidden and files which end in ".txt":
  */
 public class FooDirectoryWalker extends DirectoryWalker {
-    private static final Logger log = Logger.getLogger(FooDirectoryWalker.class);
 
     public FooDirectoryWalker(FileFilter filter) {
         super(filter, -1);

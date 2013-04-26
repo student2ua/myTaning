@@ -1,7 +1,5 @@
 package com.tor.nio;
 
-import org.apache.log4j.Logger;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +10,6 @@ import java.nio.channels.FileLock;
  * Копирование файлов через файловые каналы
  */
 public class CopyFileDemo {
-    private static final Logger log = Logger.getLogger(CopyFileDemo.class);
 
     public static void main(String args[])
             throws IOException {

@@ -14,7 +14,6 @@ import java.util.Iterator;
  * User: tor
  * Date: 02.04.2009
  * Time: 13:56:07
- * To change this template use File | Settings | File Templates.
  */
 public class FileUtil {
     /** не юзать хюня какато*/

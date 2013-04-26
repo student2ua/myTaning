@@ -1,7 +1,6 @@
 package com.tor.commons.io.DirWalker;
 
 import org.apache.commons.io.DirectoryWalker;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,10 +13,8 @@ import java.util.List;
  * User: tor
  * Date: 20.05.2010
  * Time: 15:04:11
- * To change this template use File | Settings | File Templates.
  */
 public class FileCleaner extends DirectoryWalker {
-    private static final Logger log = Logger.getLogger(FileCleaner.class);
 
     public FileCleaner() {
         super();
