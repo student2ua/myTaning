@@ -1,6 +1,5 @@
 package com.tor.thread;
 
-import org.apache.log4j.Logger;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -29,9 +28,9 @@ public class SwingWorkerExample extends JPanel {
 
         add(new JLabel("Status:"));
         this.statusArea = new JLabel();
-        this.statusArea.setSize(80,30);
+        this.statusArea.setSize(80, 30);
         add(this.statusArea);
-        setSize(800,600);
+        setSize(800, 600);
     }
 
     private class LongRunningModelFillAction extends AbstractAction {
@@ -40,12 +39,12 @@ public class SwingWorkerExample extends JPanel {
         }
 
         public void actionPerformed(ActionEvent e) {
-            PopulationWorker populationWorker = new PopulationWorker();
+            PopulationWorkerJdk4 populationWorker = new PopulationWorkerJdk4();
             populationWorker.start();
         }
     }
 
-    private class PopulationWorker extends SwingWorker {
+    private class PopulationWorkerJdk4 extends SwingWorker_jdk4 {
         public Object construct() {
             Object[] values = new Object[1000];
             for (int i = 1; i <= 1000; i++) {
@@ -82,12 +81,13 @@ public class SwingWorkerExample extends JPanel {
             }
         }
     }
-    public static void main(String[] a){
-      JFrame f = new JFrame();
-      f.setDefaultCloseOperation(1);
-      f.getContentPane().add(new SwingWorkerExample());
-      f.pack();
-      f.setVisible(true);
+
+    public static void main(String[] a) {
+        JFrame f = new JFrame();
+        f.setDefaultCloseOperation(1);
+        f.getContentPane().add(new SwingWorkerExample());
+        f.pack();
+        f.setVisible(true);
     }
 
 }

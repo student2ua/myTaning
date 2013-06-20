@@ -1,29 +1,27 @@
 package com.tor.thread;
 
-import org.apache.log4j.Logger;
-
 import javax.swing.*;
 
 /*
- * $Id: SwingWorker.java,v 1.1.1.1 2004/06/16 01:43:39 davidson1 Exp $
+ * $Id: SwingWorker_jdk4.java,v 1.1.1.1 2004/06/16 01:43:39 davidson1 Exp $
  *
  * Copyright 2004 Sun Microsystems, Inc., 4150 Network Circle,
  * Santa Clara, California 95054, U.S.A. All rights reserved.
  */
 
 /**
- * This is the 3rd version of SwingWorker (also known as
- * SwingWorker 3), an abstract class that you subclass to
+ * This is the 3rd version of SwingWorker_jdk4 (also known as
+ * SwingWorker_jdk4 3), an abstract class that you subclass to
  * perform GUI-related work in a dedicated thread.  For
  * instructions on using this class, see:
- *
+ * <p/>
  * http://java.sun.com/docs/books/tutorial/uiswing/misc/threads.html
- *
+ * <p/>
  * Note that the API changed slightly in the 3rd version:
- * You must now invoke start() on the SwingWorker after
+ * You must now invoke start() on the SwingWorker_jdk4 after
  * creating it.
  */
-public abstract class SwingWorker {
+public abstract class SwingWorker_jdk4 {
     private Object value;  // see getValue(), setValue()
     private Thread thread;
 
@@ -33,9 +31,18 @@ public abstract class SwingWorker {
      */
     private static class ThreadVar {
         private Thread thread;
-        ThreadVar(Thread t) { thread = t; }
-        synchronized Thread get() { return thread; }
-        synchronized void clear() { thread = null; }
+
+        ThreadVar(Thread t) {
+            thread = t;
+        }
+
+        synchronized Thread get() {
+            return thread;
+        }
+
+        synchronized void clear() {
+            thread = null;
+        }
     }
 
     private ThreadVar threadVar;
@@ -94,8 +101,7 @@ public abstract class SwingWorker {
             }
             try {
                 t.join();
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt(); // propagate
                 return null;
             }
@@ -107,17 +113,18 @@ public abstract class SwingWorker {
      * Start a thread that will call the <code>construct</code> method
      * and then exit.
      */
-    public SwingWorker() {
+    public SwingWorker_jdk4() {
         final Runnable doFinished = new Runnable() {
-           public void run() { finished(); }
+            public void run() {
+                finished();
+            }
         };
 
         Runnable doConstruct = new Runnable() {
             public void run() {
                 try {
                     setValue(construct());
-                }
-                finally {
+                } finally {
                     threadVar.clear();
                 }
 
