@@ -1,6 +1,6 @@
 package com.tor.db;
 
-import com.tor.thread.SwingWorker;
+import com.tor.thread.SwingWorker_jdk4;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 import oracle.jdbc.pool.OracleDataSource;
 import org.apache.commons.lang.time.StopWatch;
@@ -85,7 +85,7 @@ public class DBSupport_OracleConnectionPool {
         return con;
     }
 
-    private class DBPooledLoadWorker extends SwingWorker {
+    private class DBPooledLoadWorker extends SwingWorker_jdk4 {
 
         public Object construct() {
             Connection con = null;

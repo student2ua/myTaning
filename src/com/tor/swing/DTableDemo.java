@@ -39,7 +39,7 @@ public class DTableDemo extends JFrame{
         dTable1.setDropMode(DropMode.ON_OR_INSERT_ROWS);
 
         JScrollPane jsp2 = new JScrollPane();
-        dTable2 = new DTable(new DefaultTableModel(
+        dTable2 = new DnDTable(new DefaultTableModel(
                 new Object[][]{
                     {"A", "A"},
                     {"B", "B"},
