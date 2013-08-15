@@ -19,7 +19,8 @@ package com.tor.swing.treetable.san2;/*
  */
 
 import com.tor.swing.treetable.MergeSort;
-import com.tor.swing.treetable.TreeTableModel;
+import com.tor.swing.treetable.sun.AbstractTreeTableModel;
+import com.tor.swing.treetable.sun.TreeTableModel;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;

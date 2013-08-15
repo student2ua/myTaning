@@ -1,4 +1,4 @@
-package com.tor.swing.treetable;/*
+package com.tor.swing.treetable.sun;/*
  * %W% %E%
  *
  * Copyright 1997, 1998 Sun Microsystems, Inc. All Rights Reserved.

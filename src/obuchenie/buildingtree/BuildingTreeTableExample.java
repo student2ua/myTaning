@@ -1,5 +1,10 @@
 package obuchenie.buildingtree;
 
+import com.tor.swing.treetable.sun.JTreeTable;
+import obuchenie.data.Building;
+import obuchenie.data.DataToTest;
+import obuchenie.data.Floor;
+import obuchenie.data.Room;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -9,11 +14,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import obuchenie.data.DataToTest;
-import obuchenie.data.Building;
-import obuchenie.data.Floor;
-import obuchenie.data.Room;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,7 +30,7 @@ public class BuildingTreeTableExample {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
         DefaultTreeModel defaultTreeModel = new DefaultTreeModel(root);
         toTree(defaultTreeModel, root);
-        com.tor.swing.treetable.JTreeTable treeTable = new com.tor.swing.treetable.JTreeTable(new BuildingTreeTableModel(root));
+        JTreeTable treeTable = new JTreeTable(new BuildingTreeTableModel(root));
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 System.exit(0);

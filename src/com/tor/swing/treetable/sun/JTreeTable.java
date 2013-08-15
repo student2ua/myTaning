@@ -1,4 +1,4 @@
-package com.tor.swing.treetable;/*
+package com.tor.swing.treetable.sun;/*
  * @(#)JTreeTable.java	1.2 98/10/27
  *
  * Copyright 1997, 1998 by Sun Microsystems, Inc.,
@@ -11,9 +11,6 @@ package com.tor.swing.treetable;/*
  * it only in accordance with the terms of the license agreement
  * you entered into with Sun.
  */
-
-import com.tor.swing.treetable.TreeTableModel;
-import com.tor.swing.treetable.TreeTableModelAdapter;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

@@ -1,4 +1,4 @@
-package com.tor.swing.treetable.san2;/*
+package com.tor.swing.treetable.sun;/*
  * @(#)AbstractTreeTableModel.java	1.2 98/10/27
  *
  * Copyright 1997, 1998 by Sun Microsystems, Inc.,
@@ -12,7 +12,6 @@ package com.tor.swing.treetable.san2;/*
  * you entered into with Sun.
  */
 
-import com.tor.swing.treetable.TreeTableModel;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;

@@ -1,4 +1,4 @@
-package com.tor.swing.treetable;
+package com.tor.swing.tree;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,20 +8,13 @@ package com.tor.swing.treetable;
  * To change this template use File | Settings | File Templates.
  */
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
+import java.awt.*;
 
 public class TreeIt {
 

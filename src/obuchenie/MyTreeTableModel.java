@@ -1,11 +1,11 @@
 package obuchenie;
 
+import com.tor.swing.treetable.sun.AbstractTreeTableModel;
+import com.tor.swing.treetable.sun.TreeTableModel;
 import obuchenie.data.Person;
-import com.tor.swing.treetable.TreeTableModel;
-import com.tor.swing.treetable.san2.AbstractTreeTableModel;
 
-import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 
 /**
  * Created by IntelliJ IDEA.

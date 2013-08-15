@@ -1,10 +1,10 @@
 package obuchenie.buildingtree;
 
+import com.tor.swing.treetable.sun.AbstractTreeTableModel;
+import com.tor.swing.treetable.sun.TreeTableModel;
 import obuchenie.data.Building;
 import obuchenie.data.Floor;
 import obuchenie.data.Room;
-import com.tor.swing.treetable.TreeTableModel;
-import com.tor.swing.treetable.san2.AbstractTreeTableModel;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;

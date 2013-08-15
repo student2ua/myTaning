@@ -1,7 +1,8 @@
 package com.tor.swing;
-import com.tor.swing.treetable.JTreeTable;
-import com.tor.swing.treetable.TreeTableModel;
-import com.tor.swing.treetable.san2.AbstractTreeTableModel;
+
+import com.tor.swing.treetable.sun.AbstractTreeTableModel;
+import com.tor.swing.treetable.sun.JTreeTable;
+import com.tor.swing.treetable.sun.TreeTableModel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;

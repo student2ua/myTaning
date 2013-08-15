@@ -19,6 +19,8 @@ package com.tor.swing.treetable.san2;/*
  */
 
 
+import com.tor.swing.treetable.sun.JTreeTable;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.TableModelEvent;

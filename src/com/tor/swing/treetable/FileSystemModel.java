@@ -38,7 +38,8 @@ package com.tor.swing.treetable;/*
  * maintenance of any nuclear facility.
  */
 
-import com.tor.swing.treetable.san2.AbstractTreeTableModel;
+import com.tor.swing.treetable.sun.AbstractTreeTableModel;
+import com.tor.swing.treetable.sun.TreeTableModel;
 
 import java.io.File;
 import java.util.Date;
