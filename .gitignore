@@ -1,0 +1,23 @@
+# https://github.com/github/gitignore #
+
+*.class
+
+target/
+.classpath
+.project
+.settings
+*.swp
+.metadata
+bin/
+.svn
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Idea Files #
+*.iml
+*.ipr
+*.iws
+.idea/
