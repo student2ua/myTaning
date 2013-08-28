@@ -1,0 +1,30 @@
+<project>
+    <!--[...]-->
+    <build>
+        <!--[...]-->
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>ant-magic</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <tasks>
+                                <ant antfile="ant/build.xml" target="buildAll"/>
+                            </tasks>
+                        </configuration>
+
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <!--[...]-->
+    </build>
+    <!--[...]-->
+</project>
