@@ -1,0 +1,106 @@
+<!--http://www.mastertheboss.com/jboss-maven/maven-jboss-as-7-plugin-tutorial-->
+<project>
+    <!--...-->
+    <build>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.18</version>
+        </dependency>
+        <!--...-->
+        <plugins>
+            <!--...
+            mvn jboss-as:deploy
+            mvn jboss-as:redeploy
+            mvn jboss-as:undeploy
+            -->
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.3.Final</version>
+                <!-- If your server is not running on the default address/port, you can use the following configuration parameters in order to connect to it:-->
+                <configuration>
+                    <hostname>192.168.1.1</hostname>
+                    <port>9999</port>
+                    <name>useradmin123</name>
+                    <password>password123</password>
+                </configuration>
+
+                <executions>
+
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>deploy-mysql</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>deploy-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                            <name>mysql-connector-java-5.1.18-bin.jar</name>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>add-datasource</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <address>subsystem=datasources,data-source=java:jboss/datasources/MySqlDS</address>
+                            <resource>
+                                <enable-resource>true</enable-resource>
+                                <properties>
+                                    <jndi-name>java:jboss/datasources/MySqlDS</jndi-name>
+                                    <enabled>true</enabled>
+                                    <connection-url>jdbc:mysql://localhost:3306/mysqlDB</connection-url>
+                                    <driver-class>com.mysql.jdbc.Driver</driver-class>
+                                    <driver-name>mysql-connector-java-5.1.18-bin.jar</driver-name>
+                                    <security.user-name>root</security.user-name>
+                                    <security.password/>
+                                    <pool-name>mypool</pool-name>
+                                </properties>
+                            </resource>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--adding some configuration parameters. For a Web application-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.infinispan export</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- for an EJB application-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>${version.ejb.plugin}</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.infinispan export</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!--...-->
+    </build>
+    <!-- ...-->
+</project>
