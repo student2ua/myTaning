@@ -5,6 +5,7 @@ package obuchenie;
  *
  * @author Steve Robinson
  * @version 1.0
+ * Крестики нолики 3x3
  */
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ class TicTacToeFrame extends JFrame {
 
         setTitle("Tic Tac Toe!");
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(400, 400, 300, 300);
     }
 
@@ -63,8 +64,9 @@ class TicTacToeFrame extends JFrame {
 
             //System.out.println(turn); //turn                  //   //System.out.println("["+index[0]+"]"+"["+index[1]+"]");         //
             b.putClientProperty("OWNER", turn);
-            Icon ico = new ImageIcon(turn.toString() + ".gif");
-            b.setIcon(ico);
+            // Icon ico = new ImageIcon(turn.toString() + ".gif");
+            // b.setIcon(ico);
+            b.setText(turn == 1 ? "o" : "x");
             b.setEnabled(false);
             boolean result = checkVictoryCondition(index);
             if (result) {
@@ -157,6 +159,7 @@ class TicTacToeFrame extends JFrame {
                     buttons[i][j].putClientProperty("OWNER", null);
                     buttons[i][j].setIcon(null);
                     buttons[i][j].setEnabled(true);
+                    buttons[i][j].setText("");
                     turn = 1;
                     count = 0;
                     statusBar.setText("Player1's Turn");
@@ -166,15 +169,17 @@ class TicTacToeFrame extends JFrame {
 
     }
 }
-    class TicTacToe {
 
-        public static void main(String[] args) {
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    TicTacToeFrame frame = new TicTacToeFrame();
-                }
-            });
+class TicTacToe {
 
-        }}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                 new TicTacToeFrame();
+            }
+        });
+
+    }
+}
 
 
