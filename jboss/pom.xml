@@ -13,6 +13,7 @@
 
     <modules>
         <module>netty</module>
+        <module>netty-echo</module>
     </modules>
     <build>
         <pluginManagement>
