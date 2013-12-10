@@ -1,130 +1,141 @@
-<!--
-  Generate certificates for HTTPS described in
-  http://forum.vingrad.ru/forum/topic-91873/hl/httpsurlconnectionimpl/index.html
-  by powerOn. Ant routine by sergejzr
-  -->
-<target name="ssl">
-    <description>
-        EN: Generates Server and Client certificates for SSL
-        RU: Здесь будут созданы сертификаты для соеденения SSL между клиентом и сервером.
-    </description>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="../" default="ssl" name="demo SSL">
     <!--
-    EN:
-    In English char you have to type in is 'y', in German however 'j'. So type the letter of the JRE locale here-
-    RU:
-    'yesChar' - буква, которая выбирается в  качестве положительного ответа
-    на вопрос консоли типа
-                     Are you sure? yes|no:
-    К сожалению на разных языках ОС используются разные буквы для этого
-    (Например в Немецком - 'j', в Английском 'y')
-    Я не знаю, как это вытащить из properties,
-    поэтому юзер здесь должен указать её напрямую.
-     -->
-    <property name="yesChar" value="y" />
+      Generate certificates for HTTPS described in
+      http://forum.vingrad.ru/forum/topic-91873/hl/httpsurlconnectionimpl/index.html
+      by powerOn. Ant routine by sergejzr
+      -->
+    <target name="ssl">
+        <description>
+            EN: Generates Server and Client certificates for SSL
+            RU: Здесь будут созданы сертификаты для соеденения SSL между клиентом и сервером.
+        </description>
 
-    <!--
-    EN: Directory for temporary storage
-    RU: Директория для сохранения рабочих временных файлов
-    -->
-    <property name="tmpCertDir" value="tmp" />
+        <!--
+        EN:
+        In English char you have to type in is 'y', in German however 'j'. So type the letter of the JRE locale here-
+        RU:
+        'yesChar' - буква, которая выбирается в  качестве положительного ответа
+        на вопрос консоли типа
+                         Are you sure? yes|no:
+        К сожалению на разных языках ОС используются разные буквы для этого
+        (Например в Немецком - 'j', в Английском 'y')
+        Я не знаю, как это вытащить из properties,
+        поэтому юзер здесь должен указать её напрямую.
+         -->
+        <property name="yesChar" value="y"/>
 
-    <!--
-    EN:
-    Server data , listet as follows:
-       1) keystoreServer - File pointer to the server key storage
-       2) aliasServer - Keyname (has to be unique within one single storage)
-       3) keypassServer - Password for the key
-       4) storepassServer - Password for the storage
-       5) dnameServer - Your certificate's data
-    RU:
-    Данные сервера в следующем порядке:
-       1) keystoreServer - Имя файла(хранилище), где будет храниться серверный ключ
-       2) aliasServer - Имя ключа (должно быть однозначным в рамках одного хранилища)
-       3) keypassServer - Пароль на ключ
-       4) storepassServer - Пароль на хранилище
-       5) dnameServer - Данные сертификата (можно их тоже переменными сделать)
-    -->
-    <property name="keystoreServer" value="serverkeystore" />
-    <property name="aliasServer" value="serverKey" />
-    <property name="keypassServer" value="serverkeypass_pwd" />
-    <property name="storepassServer" value="serverstore_pwd" />
-    <property name="dnameServer" value="CN=Tor, OU=ServerTrust Group, O=ServerTrust Research Corporation, C=UA" />
+        <!--
+        EN: Directory for temporary storage
+        RU: Директория для сохранения рабочих временных файлов
+        -->
+        <property name="tmpCertDir" value="tmp"/>
 
-    <!--
-    EN:
-    Client data in the same order as described above
-    RU:
-    Данные клиента в том же проядке, что и данные сервера.
-    -->
-    <property name="keystoreClient" value="clientkeystore" />
-    <property name="aliasClient" value="clientKey" />
-    <property name="keypassClient" value="clientkeypass_pwd" />
-    <property name="storepassClient" value="klientstore_pwd" />
-    <property name="dnameClient" value="CN=Client, OU=ClientTrust Group, O=ClientTrust Research Corporation, C=UA" />
-    <!--
-    EN:
-    Preferences are fine, let ant do the rest!
-    RU:
-    Настройки окончены, пускай теперь работает муравей! :)
-    -->
+        <!--
+        EN:
+        Server data , listet as follows:
+           1) keystoreServer - File pointer to the server key storage
+           2) aliasServer - Keyname (has to be unique within one single storage)
+           3) keypassServer - Password for the key
+           4) storepassServer - Password for the storage
+           5) dnameServer - Your certificate's data
+        RU:
+        Данные сервера в следующем порядке:
+           1) keystoreServer - Имя файла(хранилище), где будет храниться серверный ключ
+           2) aliasServer - Имя ключа (должно быть однозначным в рамках одного хранилища)
+           3) keypassServer - Пароль на ключ
+           4) storepassServer - Пароль на хранилище
+           5) dnameServer - Данные сертификата (можно их тоже переменными сделать)
+               CN — common name имя владельца
+               OU — organizationUnit (e.g, department or division) департамент или отдел
+               O — organizationName — large organization name, e.g., «ABCSystems, Inc.»
+               L — localityName — locality (city) name, e.g., «Palo Alto» местоположение (город)
+               ST — stateName — state or province name, e.g., «California»
+               C — country — two-letter country code, e.g., «CH»
+        -->
+        <property name="keystoreServer" value="serverkeystore"/>
+        <property name="aliasServer" value="serverKey"/>
+        <property name="keypassServer" value="serverkeypass_pwd"/>
+        <property name="storepassServer" value="serverstore_pwd"/>
+        <property name="dnameServer" value="CN=Tor, OU=ServerTrust Group, O=ServerTrust Research Corporation, C=UA"/>
 
-    <echo message="EN: Remove old certificates"></echo>
-    <echo message="RU: Удаляем старые ключи"></echo>
-    <delete file="${keystoreServer}">
-    </delete>
-    <delete file="${keystoreClient}">
-    </delete>
+        <!--
+        EN:
+        Client data in the same order as described above
+        RU:
+        Данные клиента в том же проядке, что и данные сервера.
+        -->
+        <property name="keystoreClient" value="clientkeystore"/>
+        <property name="aliasClient" value="clientKey"/>
+        <property name="keypassClient" value="clientkeypass_pwd"/>
+        <property name="storepassClient" value="klientstore_pwd"/>
+        <property name="dnameClient" value="CN=Client, OU=ClientTrust Group, O=ClientTrust Research Corporation, C=UA"/>
+        <!--
+        EN:
+        Preferences are fine, let ant do the rest!
+        RU:
+        Настройки окончены, пускай теперь работает муравей! :)
+        -->
 
-    <echo message="EN: Create key storage for the client as well as for the server"></echo>
-    <echo message="RU: Создаём хранилища ключей для клиента и сервера"></echo>
-    <genkey taskname="genkey" alias="${aliasServer}" keypass="${keypassServer}" storepass="${storepassServer}" dname="${dnameServer}" keystore="${keystoreServer}">
-    </genkey>
-    <genkey taskname="genkey" alias="${aliasClient}" keypass="${keypassClient}" storepass="${storepassClient}" dname="${dnameClient}" keystore="${keystoreClient}">
-    </genkey>
+        <echo message="EN: Remove old certificates"/>
+        <echo message="RU: Удаляем старые ключи"/>
+        <delete file="${keystoreServer}">
+        </delete>
+        <delete file="${keystoreClient}">
+        </delete>
 
-    <echo message="EN: Sign client and server certificates"></echo>
-    <echo message="RU: Подписываем сертификаты клиента и сервера"></echo>
-    <exec dir="" executable="keytool" inputstring="${yesChar}">
-        <arg line="-selfcert -alias ${aliasServer} -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}" />
-    </exec>
-    <exec dir="" executable="keytool">
-        <arg line="-selfcert -alias ${aliasClient} -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}" />
-    </exec>
+        <echo message="EN: Create key storage for the client as well as for the server"/>
+        <echo message="RU: Создаём хранилища ключей для клиента и сервера"/>
+        <genkey taskname="genkey" alias="${aliasServer}" keypass="${keypassServer}" storepass="${storepassServer}"
+                dname="${dnameServer}" keystore="${keystoreServer}">
+        </genkey>
+        <genkey taskname="genkey" alias="${aliasClient}" keypass="${keypassClient}" storepass="${storepassClient}"
+                dname="${dnameClient}" keystore="${keystoreClient}">
+        </genkey>
 
-    <echo message="EN: Export server certificate into client storage"></echo>
-    <echo message="RU: Экспортируем серверный сертификат в хранилище клиента"></echo>
-    <exec dir="" executable="keytool">
-        <arg line="-export -file ${tmpCertDir}/serverCert.txt -alias ${aliasServer} -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}" />
-    </exec>
-    <exec dir="" inputstring="j" executable="keytool">
-        <arg line="-import -file ${tmpCertDir}/serverCert.txt -alias ${aliasServer} -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}" />
-    </exec>
+        <echo message="EN: Sign client and server certificates"/>
+        <echo message="RU: Подписываем сертификаты клиента и сервера"/>
+        <exec dir="" executable="keytool" inputstring="${yesChar}">
+            <arg line="-selfcert -alias ${aliasServer} -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}"/>
+        </exec>
+        <exec dir="" executable="keytool">
+            <arg line="-selfcert -alias ${aliasClient} -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}"/>
+        </exec>
 
-    <echo message="EN: Export client certificate into server storage"></echo>
-    <echo message="RU: Экспортируем сертификат клиентс в хранилище сервера"></echo>
-    <exec dir="" executable="keytool">
-        <arg line="-export -file ${tmpCertDir}/clientCert.txt -alias ${aliasClient} -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}" />
-    </exec>
-    <exec dir="" inputstring="${yesChar}" executable="keytool">
-        <arg line="-import -file ${tmpCertDir}/clientCert.txt -alias ${aliasClient} -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}" />
-    </exec>
+        <echo message="EN: Export server certificate into client storage"/>
+        <echo message="RU: Экспортируем серверный сертификат в хранилище клиента"/>
+        <exec dir="" executable="keytool">
+            <arg line="-export -file ${tmpCertDir}/serverCert.txt -alias ${aliasServer} -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}"/>
+        </exec>
+        <exec dir="" inputstring="j" executable="keytool">
+            <arg line="-import -file ${tmpCertDir}/serverCert.txt -alias ${aliasServer} -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}"/>
+        </exec>
 
-    <echo message="EN: Clean up"></echo>
-    <echo message="RU: Уберём за собой"></echo>
-    <delete file="${tmpCertDir}/serverCert.txt">
-    </delete>
-    <delete file="${tmpCertDir}/clientCert.txt">
-    </delete>
+        <echo message="EN: Export client certificate into server storage"/>
+        <echo message="RU: Экспортируем сертификат клиентс в хранилище сервера"/>
+        <exec dir="" executable="keytool">
+            <arg line="-export -file ${tmpCertDir}/clientCert.txt -alias ${aliasClient} -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}"/>
+        </exec>
+        <exec dir="" inputstring="${yesChar}" executable="keytool">
+            <arg line="-import -file ${tmpCertDir}/clientCert.txt -alias ${aliasClient} -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}"/>
+        </exec>
 
-    <echo message="EN: Read check of the client storage"></echo>
-    <echo message="RU: Читаем хранилище клиента (просто тест)"></echo>
-    <exec dir="" executable="keytool">
-        <arg line="-list -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}" />
-    </exec>
-    <echo message="EN: Read check of the server storage"></echo>
-    <echo message="RU: Читаем хранилище клиента (просто тест)"></echo>
-    <exec dir="" executable="keytool">
-        <arg line="-list -keystore ${keystoreServer} -keypass ${keypassserver} -storepass ${storepassServer}" />
-    </exec>
-</target>
+        <echo message="EN: Clean up"/>
+        <echo message="RU: Уберём за собой"/>
+        <delete file="${tmpCertDir}/serverCert.txt">
+        </delete>
+        <delete file="${tmpCertDir}/clientCert.txt">
+        </delete>
+
+        <echo message="EN: Read check of the client storage"/>
+        <echo message="RU: Читаем хранилище клиента (просто тест)"/>
+        <exec dir="" executable="keytool">
+            <arg line="-list -keystore ${keystoreClient} -keypass ${keypassClient} -storepass ${storepassClient}"/>
+        </exec>
+        <echo message="EN: Read check of the server storage"/>
+        <echo message="RU: Читаем хранилище клиента (просто тест)"/>
+        <exec dir="" executable="keytool">
+            <arg line="-list -keystore ${keystoreServer} -keypass ${keypassServer} -storepass ${storepassServer}"/>
+        </exec>
+    </target>
+</project>
