@@ -18,9 +18,7 @@ import java.awt.event.ActionEvent;
  * User: tor
  * Date: 04.06.13
  * Time: 14:31
- * $Rev::               $:  Revision of last commit
- * $Author::            $:  Author of last commit
- * $Date::              $:  Date of last commit
+ * exemple of RowSorter, RowFilter, Numbering Table Row
  */
 
 

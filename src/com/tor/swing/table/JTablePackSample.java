@@ -53,10 +53,9 @@ public class JTablePackSample {
     public static void main(String[] args) {
         TableModel tableModel = new DefaultTableModel(
                 new String[][]{
-                        {"abc", "abcdefg", "abcdefghijk"
-                        }, {"abcdefghijklmno", "absdefghi", "abc"
-                }, {"abcde", "abcdefghijklmnopqrstuvwxyz", "abcdefgjijklmn"
-                },
+                        {"abc", "abcdefg", "abcdefghijk"},
+                        {"abcdefghijklmno", "absdefghi", "abc"},
+                        {"abcde", "abcdefghijklmnopqrstuvwxyz", "abcdefgjijklmn"},
                 },
                 new String[]{
                         "a", "b", "c"
@@ -74,7 +73,7 @@ public class JTablePackSample {
         frame.setContentPane(tableScrollPane);
         frame.setSize(512, 384);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 }
