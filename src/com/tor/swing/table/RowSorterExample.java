@@ -35,7 +35,7 @@ public class RowSorterExample extends JPanel {
         };
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("OnlyFirst", createOnlyFirst(model));
-        tabbedPane.addTab("GerComparator", GerComparator(model));
+        tabbedPane.addTab("eSetComparator", eGetComparator(model));
         add(tabbedPane);
     }
 
@@ -68,14 +68,14 @@ public class RowSorterExample extends JPanel {
         return new JScrollPane(jTable);
     }
 
-    private Component GerComparator(TableModel model) {
+    private Component eGetComparator(TableModel model) {
 
         JTable jTable = new JTable(model);
-        TableRowSorter sorter = new TableRowSorter(jTable.getModel()) {
+        TableRowSorter sorter = new TableRowSorter(jTable.getModel())/* {
             @Override
             public Comparator<?> getComparator(int column) {
                 Comparator comparator = super.getComparator(column);
-                if (column == 1) comparator = new Comparator() {
+                if (column == 0) comparator = new Comparator() {
                     @Override
                     public int compare(Object o1, Object o2) {
                         Person p1 = (Person) o1;
@@ -87,8 +87,17 @@ public class RowSorterExample extends JPanel {
                 };
                 return comparator;
             }
-        };
-
+        }*/;
+         sorter.setComparator(0,new Comparator<Object>() {
+             @Override
+             public int compare(Object o1, Object o2) {
+                 Person p1 = (Person) o1;
+                 Person p2 = (Person) o2;
+                 String s1 = p1.getFio().getLastName() + p1.getFio().getFirstName() + p1.getFio().getMidllName();
+                 String s2 = p2.getFio().getLastName() + p2.getFio().getFirstName() + p2.getFio().getMidllName();
+                 return s1.compareTo(s2);
+             }
+         });
 
         jTable.setRowSorter(sorter);
 
