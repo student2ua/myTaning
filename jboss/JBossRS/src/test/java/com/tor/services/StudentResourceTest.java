@@ -7,6 +7,9 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
+import static java.net.HttpURLConnection.HTTP_CREATED;
+import static java.net.HttpURLConnection.HTTP_NO_CONTENT;
+
 /**
  * User: tor
  * Date: 16.12.13
@@ -28,7 +31,7 @@ public class StudentResourceTest {
 
             Response response = client.target("http://localhost:8080/services/student")
                     .request().post(Entity.xml(xml));
-            if (response.getStatus() != 201) throw new RuntimeException("Failed to create");
+            if (response.getStatus() != HTTP_CREATED) throw new RuntimeException("Failed to create");   //201
             String location = response.getLocation().toString();
             System.out.println("Location: " + location);
             response.close();
@@ -43,7 +46,7 @@ public class StudentResourceTest {
                     + "<middle-name>Claren2</middle-name>"
                     + "</student>";
             response = client.target(location).request().put(Entity.xml(updateCustomer));
-            if (response.getStatus() != 204) throw new RuntimeException("Failed to update");
+            if (response.getStatus() != HTTP_NO_CONTENT) throw new RuntimeException("Failed to update"); //204
             response.close();
             System.out.println("**** After Update ***");
             customer = client.target(location).request().get(String.class);
