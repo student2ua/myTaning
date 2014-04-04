@@ -1,5 +1,7 @@
 package obuchenie.data;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by IntelliJ IDEA.
  * User: tor
@@ -7,11 +9,15 @@ package obuchenie.data;
  * Time: 18:19:56
  * To change this template use File | Settings | File Templates.
  */
+@XmlRootElement
 public class FIO {
     public FIO(String lastName, String midllName, String firstName) {
         this.lastName = lastName;
         this.midllName = midllName;
         this.firstName = firstName;
+    }
+
+    public FIO() {
     }
 
     private String lastName;

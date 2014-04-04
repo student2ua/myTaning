@@ -2,6 +2,8 @@ package obuchenie.data;
 
 import org.apache.log4j.Logger;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by IntelliJ IDEA.
  * User: tor
@@ -9,11 +11,15 @@ import org.apache.log4j.Logger;
  * Time: 18:24:58
  * To change this template use File | Settings | File Templates.
  */
+@XmlRootElement
 public class Person {
     private static final Logger log = Logger.getLogger(Person.class);
     private FIO fio;
     private Integer age;
     private boolean sex;
+
+    public Person() {
+    }
 
     public Person(FIO fio, Integer age, boolean sex) {
         this.fio = fio;
@@ -45,6 +51,6 @@ public class Person {
         this.sex = sex;
     }
    public String  toString(){
-       return getFio().toString()+" "+getAge()+" ago,"+(isSex()?"M":"Æ");
+       return getFio().toString()+" "+getAge()+" ago,"+(isSex()?"M":"ï¿½");
    }
 }
