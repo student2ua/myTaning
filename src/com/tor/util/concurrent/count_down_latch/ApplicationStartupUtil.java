@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * Date: 30.08.13
  * http://howtodoinjava.com/2013/07/18/when-to-use-countdownlatch-java-concurrency-example-tutorial/
  * <p>
- * enables a java thread to wait until other set of threads completes their tasks. e.g. Application’s main thread want
+ * enables a java thread to wait until other set of threads completes their tasks. e.g. Application's main thread want
  * to wait, till other service threads which are responsible for starting framework services have completed started all services</p>
  */
 public class ApplicationStartupUtil {
@@ -38,9 +38,8 @@ public class ApplicationStartupUtil {
         _services = new ArrayList<BaseHealthChecker>();
         _services.add(new NetworkHealthChecker(_latch));//1
         _services.add(new NetworkHealthChecker(_latch));
-        _services.add(new NetworkHealthChecker(_latch));
-      /*  _services.add(new CacheHealthChecker(_latch)); //2
-        _services.add(new DatabaseHealthChecker(_latch));//3*/
+      /*  _services.add(new CacheHealthChecker(_latch)); //2*/
+        _services.add(new DatabaseHealthChecker(_latch));//3
 
         //Start service checkers using executor framework
         Executor executor = Executors.newFixedThreadPool(_services.size());

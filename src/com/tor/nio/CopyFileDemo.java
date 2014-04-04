@@ -7,25 +7,25 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 
 /**
- * Копирование файлов через файловые каналы
+ * РљРѕРїРёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»РѕРІ С‡РµСЂРµР· С„Р°Р№Р»РѕРІС‹Рµ РєР°РЅР°Р»С‹
  */
 public class CopyFileDemo {
 
     public static void main(String args[])
             throws IOException {
-// проверяем переданные аргументы
+// РїСЂРѕРІРµСЂСЏРµРј РїРµСЂРµРґР°РЅРЅС‹Рµ Р°СЂРіСѓРјРµРЅС‚С‹
         if (args.length != 2) {
             System.err.println("missing filenames");
             System.exit(1);
         }
-// создаем и инициализируем каналы
+// СЃРѕР·РґР°РµРј Рё РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РєР°РЅР°Р»С‹
         FileInputStream fis = new FileInputStream(args[0]);
         FileOutputStream fos = new FileOutputStream(args[1]);
         FileChannel fcin = fis.getChannel();
         FileChannel fcout = fos.getChannel();
-// выполнить копирование файла
+// РІС‹РїРѕР»РЅРёС‚СЊ РєРѕРїРёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»Р°
         fcin.transferTo(0, fcin.size(), fcout);
-// закрываем
+// Р·Р°РєСЂС‹РІР°РµРј
         fcin.close();
         fcout.close();
         fis.close();
