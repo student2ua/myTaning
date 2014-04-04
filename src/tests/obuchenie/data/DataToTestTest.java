@@ -1,14 +1,11 @@
 package obuchenie.data;
 
-import obuchenie.data.DataToTest;
-import obuchenie.data.Person;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import java.io.FileNotFoundException;
 import java.util.Collection;
-
 import java.util.Vector;
 
 /**
@@ -31,9 +28,9 @@ public class DataToTestTest extends TestCase {
         Vector v= new Vector((Collection) c);
         assertTrue((v.get(0)instanceof Person));
         Person p= (Person) v.get(0);
-        assertTrue(p.getFio().getLastName().equals("Фамилье1"));
+        assertTrue(p.getFio().getLastName().equals("Р¤Р°РјРёР»СЊРµ1"));
         Person p2= (Person) DataToTest.getPersonCollection().toArray()[0];
-        assertTrue(p2.getFio().getLastName().equals("Фамилье1"));
+        assertTrue(p2.getFio().getLastName().equals("Р¤Р°РјРёР»СЊРµ1"));
       // assertEquals();
     }
 

@@ -13,16 +13,16 @@ import java.util.List;
  */
 public class DataToTest {
     private static List collectionPerson = new ArrayList() {{
-        add(new Person(new FIO("Фамилье1", "Отчество1", "Имечко1"), new Integer(20), true));
-        add(new Person(new FIO("Фамилье1", "Отчество1", "Имечко2"), new Integer(21), false));
-        add(new Person(new FIO("Фамилье1", "Отчество1", "Имечко3"), new Integer(19), true));
-        add(new Person(new FIO("Фамилье1", "Отчество2", "Имечко1"), new Integer(18), false));
-        add(new Person(new FIO("Фамилье1", "Отчество2", "Имечко2"), new Integer(22), false));
-        add(new Person(new FIO("Фамилье1", "Отчество2", "Имечко3"), new Integer(16), false));
-        add(new Person(new FIO("Фамилье2", "Отчество3", "Имечко1"), new Integer(32), true));
-        add(new Person(new FIO("Фамилье2", "Отчество3", "Имечко2"), new Integer(17), true));
-        add(new Person(new FIO("Фамилье2", "Отчество3", "Имечко3"), new Integer(25), false));
-        add(new Person(new FIO("Фамилье3", "Отчество1", "Имечко1"), new Integer(24), true));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ1", "РћС‚С‡РµСЃС‚РІРѕ1", "РРјРµС‡РєРѕ1"), new Integer(20), true));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ1", "РћС‚С‡РµСЃС‚РІРѕ1", "РРјРµС‡РєРѕ2"), new Integer(21), false));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ1", "РћС‚С‡РµСЃС‚РІРѕ1", "РРјРµС‡РєРѕ3"), new Integer(19), true));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ1", "РћС‚С‡РµСЃС‚РІРѕ2", "РРјРµС‡РєРѕ1"), new Integer(18), false));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ1", "РћС‚С‡РµСЃС‚РІРѕ2", "РРјРµС‡РєРѕ2"), new Integer(22), false));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ1", "РћС‚С‡РµСЃС‚РІРѕ2", "РРјРµС‡РєРѕ3"), new Integer(16), false));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ2", "РћС‚С‡РµСЃС‚РІРѕ3", "РРјРµС‡РєРѕ1"), new Integer(32), true));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ2", "РћС‚С‡РµСЃС‚РІРѕ3", "РРјРµС‡РєРѕ2"), new Integer(17), true));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ2", "РћС‚С‡РµСЃС‚РІРѕ3", "РРјРµС‡РєРѕ3"), new Integer(25), false));
+        add(new Person(new FIO("Р¤Р°РјРёР»СЊРµ3", "РћС‚С‡РµСЃС‚РІРѕ1", "РРјРµС‡РєРѕ1"), new Integer(24), true));
     }};
 
     public static List getPersonCollection() {
