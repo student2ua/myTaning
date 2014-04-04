@@ -86,7 +86,7 @@ public class SwingWorker_jdk6 {
 
         @Override
         protected Integer doInBackground() throws Exception {
-            while (count < MAX_COUNT) {
+            while (count < MAX_COUNT||isCancelled()) {
                 Thread.sleep(SLEEP_TIME);
                 count++;
                 setProgress((100 * count) / MAX_COUNT);
