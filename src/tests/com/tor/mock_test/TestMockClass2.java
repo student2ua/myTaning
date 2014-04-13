@@ -1,18 +1,16 @@
-package tests.com.tor.mock_test;
+package com.tor.mock_test;
 
-import org.apache.log4j.Logger;
 import org.jmock.Mock;
-import org.jmock.cglib.MockObjectTestCase;
+import org.jmock.MockObjectTestCase;
+//import org.jmock.cglib.MockObjectTestCase;
 
 /**
  * Created by IntelliJ IDEA.
  * User: tor
  * Date: 02.02.2010
  * Time: 19:37:29
- * To change this template use File | Settings | File Templates.
  */
 public class TestMockClass2 extends MockObjectTestCase {
-    private static final Logger log = Logger.getLogger(TestMockClass2.class);
 
     public static interface IListener {
         void eventOut(String arg);

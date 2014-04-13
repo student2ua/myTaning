@@ -23,9 +23,13 @@ public class JsonHelperTest {
 
     @Test
     public void testFromJSON() throws Exception {
-        String s = "{\"person\":{\"age\":20,\"fio\":{\"firstName\":\"Р�РјРµС‡РєРѕ1\",\"lastName\":\"Р¤Р°РјРёР»СЊРµ1\",\"midllName\":\"РћС‚С‡РµСЃС‚РІРѕ1\"},\"sex\":true}}";
+        String s = "{\"person\":{\"age\":20,\"fio\":{\"firstName\":\"Имечко1\",\"lastName\":\"Фамилье1\",\"midllName\":\"Отчество1\"},\"sex\":true}}";
+        System.out.println("s = " + s);
         Person p = JsonHelper.fromJSON(s, Person.class);
         Assert.assertNotNull(p);
         System.out.println("p = " + p);
+        Assert.assertTrue(p.getFio().getFirstName().equalsIgnoreCase("Имечко1"));
+        Assert.assertTrue(p.getFio().getMidllName().equalsIgnoreCase("Отчество1"));
+        Assert.assertTrue(p.getFio().getLastName().equalsIgnoreCase("Фамилье1"));
     }
 }

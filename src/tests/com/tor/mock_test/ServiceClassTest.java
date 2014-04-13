@@ -6,7 +6,8 @@ import com.tor.mock_test.ServiceClass;
 import com.tor.mock_test.ServiceClass_CNA;
 import org.apache.log4j.Logger;
 import org.jmock.Mock;
-import org.jmock.cglib.MockObjectTestCase;
+import org.jmock.MockObjectTestCase;
+//import org.jmock.cglib.MockObjectTestCase;
 
 /**
  * Created by IntelliJ IDEA.
