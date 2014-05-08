@@ -42,12 +42,13 @@ public class JMXConnect2JBoss {
         Boolean started = (Boolean) conn.getAttribute(name, "Started");
 
     }
-
+   
+      
     private static String getJmxHostname() {
-        return "DEV";
+        return "localHost";
     }
 
-    private static Integer getJmxPort() {
-        return 1090;
+    public static int getJmxPort() {
+        return 1251;
     }
 }
