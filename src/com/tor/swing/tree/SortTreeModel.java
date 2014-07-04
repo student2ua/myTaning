@@ -2,8 +2,8 @@ package com.tor.swing.tree;
 
 
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 import java.util.Comparator;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Comparator;
 *a node's children in alphabetical order.
 *
  */
-class SortTreeModel extends DefaultTreeModel {
+public class SortTreeModel extends DefaultTreeModel {
   private Comparator comparator;
 
   public SortTreeModel(TreeNode node, Comparator c) {

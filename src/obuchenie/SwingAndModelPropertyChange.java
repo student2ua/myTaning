@@ -2,6 +2,7 @@ package obuchenie;
 
 import javax.swing.event.SwingPropertyChangeSupport;
 import java.awt.*;
+import java.beans.PropertyChangeListener;
 
 /**
  * User: tor
@@ -38,5 +39,13 @@ public class SwingAndModelPropertyChange {
         Integer old = this.integer;
         this.integer = integer;
         pcs.firePropertyChange("integer", old, integer);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
     }
 }

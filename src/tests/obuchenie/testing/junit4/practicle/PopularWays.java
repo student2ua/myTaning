@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  * User: tor
  * Date: 10.04.14
  * Time: 13:43
- * To change this template use File | Settings | File Templates.
+ * примеры как проверять на определенную ошибку
  */
 public class PopularWays {
     Calculator calculator = new Calculator();

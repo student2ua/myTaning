@@ -77,7 +77,7 @@ public class SimpleScriptingTest extends TestCase {
             "println(\"End script \\r\\n\");";
 
     /**
-     * Вызов сценариев из кода Java
+     * Р’С‹Р·РѕРІ СЃС†РµРЅР°СЂРёРµРІ РёР· РєРѕРґР° Java
      */
     public void testJavaScript() {
         try {
@@ -90,7 +90,7 @@ public class SimpleScriptingTest extends TestCase {
     }
 
     /**
-     * Связывание объектов для сценариев
+     * РЎРІСЏР·С‹РІР°РЅРёРµ РѕР±СЉРµРєС‚РѕРІ РґР»СЏ СЃС†РµРЅР°СЂРёРµРІ
      */
     public void testJavaScript_binding() {
         try {
@@ -99,7 +99,7 @@ public class SimpleScriptingTest extends TestCase {
             Bindings bindings = new SimpleBindings();
             bindings.put("author", new Person(new FIO("Ted", "Neward", ""), 39, false));
             bindings.put("title", "5 Things You Didn't Know");
-            //свойства в стиле JavaBeans сводятся к прямому доступу к имени, как если бы это были поля.
+            //СЃРІРѕР№СЃС‚РІР° РІ СЃС‚РёР»Рµ JavaBeans СЃРІРѕРґСЏС‚СЃСЏ Рє РїСЂСЏРјРѕРјСѓ РґРѕСЃС‚СѓРїСѓ Рє РёРјРµРЅРё, РєР°Рє РµСЃР»Рё Р±С‹ СЌС‚Рѕ Р±С‹Р»Рё РїРѕР»СЏ.
             engine.eval("println(\"Hello from inside scripting!\")\n" +
                     "println(\"author.firstName = \" + author.fio.lastName)", bindings);
 
@@ -110,7 +110,7 @@ public class SimpleScriptingTest extends TestCase {
     }
 
     /**
-     * Компиляция часто используемых сценариев
+     * РљРѕРјРїРёР»СЏС†РёСЏ С‡Р°СЃС‚Рѕ РёСЃРїРѕР»СЊР·СѓРµРјС‹С… СЃС†РµРЅР°СЂРёРµРІ
      */
 
     public void testJavaScript_compil() {

@@ -7,8 +7,8 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
@@ -35,7 +35,7 @@ public class HttpServerDemo {
             if (requestMethod.equalsIgnoreCase("GET")) {
                 Headers responseHeaders = httpExchange.getResponseHeaders();
                 responseHeaders.set("Content-Type", "text/plain");
-                httpExchange.sendResponseHeaders(200, 0);
+                httpExchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);//200
 
                 OutputStream responseBody = httpExchange.getResponseBody();
                 Headers requestHeaders = httpExchange.getRequestHeaders();

@@ -6,25 +6,17 @@ package com.tor.swing.table.simpleInteractive;
  * Date: 01.11.11
  * Time: 17:37
  * http://www.javalobby.org/articles/jtable/
- * переход табом с созданием новой сторки
+ * РїРµСЂРµС…РѕРґ С‚Р°Р±РѕРј СЃ СЃРѕР·РґР°РЅРёРµРј РЅРѕРІРѕР№ СЃС‚РѕСЂРєРё
  */
+
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
- import java.awt.event.WindowEvent;
- import java.awt.BorderLayout;
- import java.awt.Component;
- import java.awt.FlowLayout;
- import javax.swing.event.TableModelEvent;
- import javax.swing.event.TableModelListener;
- import javax.swing.table.DefaultTableCellRenderer;
- import javax.swing.table.TableColumn;
- import javax.swing.JButton;
- import javax.swing.JFrame;
- import javax.swing.JLabel;
- import javax.swing.JPanel;
- import javax.swing.JScrollPane;
- import javax.swing.JTable;
- import javax.swing.JTextField;
- import javax.swing.UIManager;
+import java.awt.event.WindowEvent;
 
  public class InteractiveForm extends JPanel {
      public static final String[] columnNames = {

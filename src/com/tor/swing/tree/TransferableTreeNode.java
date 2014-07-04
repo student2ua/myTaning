@@ -1,13 +1,11 @@
 package com.tor.swing.tree;
 
-import org.apache.log4j.Logger;
-
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +14,7 @@ import java.io.ByteArrayInputStream;
  * Time: 18:28:53
  * To change this template use File | Settings | File Templates.
  */
-class TransferableTreeNode extends DefaultMutableTreeNode implements
+public class TransferableTreeNode extends DefaultMutableTreeNode implements
         Transferable {
   final static int TREE = 0;
 
