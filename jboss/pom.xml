@@ -16,6 +16,7 @@
         <module>netty-echo</module>
         <module>JBossRS</module>
         <module>netty-uptime-client</module>
+        <module>EJBCallbacks</module>
     </modules>
     <build>
         <pluginManagement>
