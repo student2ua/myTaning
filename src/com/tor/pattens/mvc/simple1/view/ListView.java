@@ -1,4 +1,4 @@
-package com.tor.pattens.mvc.view;
+package com.tor.pattens.mvc.simple1.view;
 
 import org.apache.log4j.Logger;
 

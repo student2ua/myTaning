@@ -1,8 +1,8 @@
-package com.tor.pattens.mvc;
+package com.tor.pattens.mvc.simple1;
 
-import com.tor.pattens.mvc.model.DataModel;
-import com.tor.pattens.mvc.view.JComboView;
-import com.tor.pattens.mvc.view.ListView;
+import com.tor.pattens.mvc.simple1.model.DataModel;
+import com.tor.pattens.mvc.simple1.view.JComboView;
+import com.tor.pattens.mvc.simple1.view.ListView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -13,11 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by IntelliJ IDEA.
  * User: tor
  * Date: 24.03.2009
  * Time: 14:47:48
- * To change this template use File | Settings | File Templates.
  */
 public class StartUp extends JFrame {
     private static final Logger log = Logger.getLogger(StartUp.class);
@@ -30,7 +28,7 @@ public class StartUp extends JFrame {
 
     public StartUp() throws HeadlessException {
         super();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = new Dimension(405, 325);
