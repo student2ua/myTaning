@@ -12,7 +12,8 @@
         <spring.security.version>3.2.4.RELEASE</spring.security.version>
         <spring.framework.version>4.0.5.RELEASE</spring.framework.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.sity>http://habrahabr.ru/post/226791/</project.sity>
+        <project.link0>http://habrahabr.ru/post/226791/</project.link0>
+        <project.link1>https://github.com/eugenp/tutorials</project.link1>
     </properties>
 
     <dependencies>
