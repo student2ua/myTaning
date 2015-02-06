@@ -34,7 +34,7 @@ public class JDBCSample extends TestCase {
         connection = ds.getConnection();
     }
 
-    private DataSource initDS() throws SQLException, NamingException {
+    private DataSource initDSJNDI() throws SQLException, NamingException {
         Properties properties = new Properties();
         properties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jnp.interfaces.NamingContextFactory");
         properties.put(Context.PROVIDER_URL, "dev:1099");
@@ -43,7 +43,7 @@ public class JDBCSample extends TestCase {
         /*  pds.setServerName("xpserver");
         pds.setPortNumber(1521);
         pds.setDatabaseName("accoi");*/
-        pds.setURL("jdbc:oracle:thin:@xpserver:1521:accoi");
+        pds.setURL("jdbc:oracle:thin:@ann:1521:accotest");
         pds.setUser("APP");
         pds.setPassword("APP");
         InitialContext ct = new InitialContext(properties);
@@ -59,6 +59,27 @@ public class JDBCSample extends TestCase {
         context.bind("jdbc/xpserver",rez);*/
         InitialContext context = new InitialContext();
         return (DataSource) context.lookup(JDBC_XPSERVER);
+    }
+
+ private DataSource initDS() throws SQLException, NamingException {
+
+        OracleConnectionPoolDataSource pds = new OracleConnectionPoolDataSource();
+        /*  pds.setServerName("xpserver");
+        pds.setPortNumber(1521);
+        pds.setDatabaseName("accoi");*/
+        pds.setURL("jdbc:oracle:thin:@ann:1521:accotest");
+        pds.setUser("APP");
+        pds.setPassword("APP");
+
+        //--------------
+        /* OracleDataSource rez=new OracleDataSource();
+        *//*rez.setURL("xpserver:1521:accoi");
+        rez.setUser("APP");
+        rez.setPassword("APP");*//*
+        InitialContext context=new InitialContext();
+        context.bind("jdbc/xpserver",rez);*/
+
+        return pds;
     }
 
     public void testDatabaseMetaData() {
@@ -140,9 +161,9 @@ public class JDBCSample extends TestCase {
 
     public void tearDown() throws Exception {
         super.tearDown();
-        InitialContext initialContext = new InitialContext();
+      /*  InitialContext initialContext = new InitialContext();
         initialContext.unbind(JDBC_XPSERVER);
-        initialContext.close();
+        initialContext.close();*/
         if (connection != null) {
             connection.close();
         }

@@ -19,7 +19,7 @@ public class ExmplSmtpCache {
         OracleConnection connection = null;
         OraclePreparedStatement oraclePreparedStatement = null;
         OracleDataSource dataSource = new OracleDataSource();
-        dataSource.setURL("jdbc:oracle:thin:@xpserver:1521:accoi");
+        dataSource.setURL("jdbc:oracle:thin:@ann:1521:accotest");
         dataSource.setUser("APP");
         dataSource.setPassword("APP");
         String sql = "select id,login from UNIVERSITYAUDIT.TEACHERLOGIN";
@@ -35,6 +35,7 @@ public class ExmplSmtpCache {
         long endTime = System.currentTimeMillis();
         System.out.println("non cached 10 execute " + (endTime - startTime));
         connection.close();
+
         //2 - execute caching
         connection = (OracleConnection) dataSource.getConnection();
         //set size 1-----------------------------------
