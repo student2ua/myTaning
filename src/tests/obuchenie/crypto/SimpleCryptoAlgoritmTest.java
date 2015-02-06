@@ -7,11 +7,11 @@ import org.junit.runners.JUnit4;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,7 +25,7 @@ import java.util.Arrays;
 @RunWith(JUnit4.class)
 public class SimpleCryptoAlgoritmTest {
     @Test
-    public void MD5_exemple() {
+    public void MD5_example() {
         String passwordToHash = "password";
         String generatedPassword = null;
         try {
@@ -44,6 +44,26 @@ public class SimpleCryptoAlgoritmTest {
         }
         System.out.println(generatedPassword);
         Assert.assertEquals(generatedPassword, "5f4dcc3b5aa765d61d8327deb882cf99".toUpperCase());
+    }
+
+    @Test
+    public void SHA384_example() throws Exception {
+        String passwordToHash = "password";
+        String generatedPassword = null;
+        // Create MessageDigest instance for SHA384
+        MessageDigest md = MessageDigest.getInstance("SHA-384"); //SHA-256, SHA-512
+        //Add password bytes to digest
+        md.update(passwordToHash.getBytes());
+        //Get the hash's bytes
+        byte[] bytes = md.digest();
+        System.out.println("bytes.length = " + bytes.length);
+        System.out.println("bytes = " + Arrays.toString(bytes));
+        //This bytes[] has bytes in decimal format;
+        //Convert it to hexadecimal format in AuthTicket.bytesToHex
+        //Get complete hashed password in hex format
+        generatedPassword = AuthTicket.bytesToHex(bytes, 0, bytes.length);
+        System.out.println("Hex= " + generatedPassword);
+        Assert.assertEquals(generatedPassword, "A8B64BABD0ACA91A59BDBB7761B421D4F2BB38280D3A75BA0F21F2BEBC45583D446C598660C94CE680C47D19C30783A7");
     }
 
     /**
@@ -82,26 +102,40 @@ public class SimpleCryptoAlgoritmTest {
     }
 
     @Test
-    public void PBKDF2WithHmacSHA1_with_Salt_exemple() {
+    public void PBKDF2WithHmacSHA1_with_Salt_exemple() throws Exception {
         String passwordToHash = "password";
         int iterations = 1000;
         String generatedPassword = null;
         byte[] salt = new byte[0];
-        try {
 
-            char[] chars = passwordToHash.toCharArray();
-            salt = getSalt().getBytes();
 
-            PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            byte[] hash = skf.generateSecret(spec).getEncoded();
-            generatedPassword = AuthTicket.bytesToHex(hash, 0, hash.length);
+        char[] chars = passwordToHash.toCharArray();
+        salt = getSalt().getBytes();
+        PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 64 * 8);
+        System.out.println("spec.getKeyLength() = " + spec.getKeyLength());
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        generatedPassword = AuthTicket.bytesToHex(hash, 0, hash.length);
 
-        } catch (Exception e) {
-            Assert.fail(e.toString());
+
+        System.out.println("Iterations= " + iterations);
+        System.out.println("Hex Salt= " + AuthTicket.bytesToHex(salt, 0, salt.length));
+        System.out.println("Hex hash= " + generatedPassword);
+    }
+
+    @Test
+    public void testGetListSecurityProvider() {
+        Provider provider[] = Security.getProviders();
+        for (Provider pro : provider) {
+            System.out.println(pro);
+            SortedSet sortedSet=new TreeSet();
+            for (Enumeration e = pro.keys(); e.hasMoreElements(); )
+                sortedSet.add(e.nextElement());
+            for (Object o : sortedSet) {
+                System.out.println(" \t" + o);
+            }
+
         }
-        System.out.println(iterations);
-        System.out.println(AuthTicket.bytesToHex(salt, 0, salt.length));
-        System.out.println(generatedPassword);
+
     }
 }
