@@ -17,6 +17,8 @@
         <module>JBossRS</module>
         <module>netty-uptime-client</module>
         <module>EJBCallbacks</module>
+        <!--<module>Asynchron</module>-->
+        <module>AsyncUtilsExample</module>
     </modules>
     <build>
         <pluginManagement>
