@@ -16,7 +16,7 @@ import java.sql.Statement;
  * User: tor
  * Date: 14.07.2010
  * Time: 16:05:08
- * Работа с базой через пул
+ * Р Р°Р±РѕС‚Р° СЃ Р±Р°Р·РѕР№ С‡РµСЂРµР· РїСѓР»
  */
 public class DBSupport_OracleConnectionPool {
     private static final Logger log = Logger.getLogger(DBSupport_OracleConnectionPool.class);
@@ -54,21 +54,21 @@ public class DBSupport_OracleConnectionPool {
             try {
                 rs.close();
             } catch (SQLException e) {
-                System.out.println("все равно что то отвалилось при закрытии \n" + e);
+                System.out.println("РІСЃРµ СЂР°РІРЅРѕ С‡С‚Рѕ С‚Рѕ РѕС‚РІР°Р»РёР»РѕСЃСЊ РїСЂРё Р·Р°РєСЂС‹С‚РёРё \n" + e);
             }
         }
         if (stmt != null) {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                System.out.println("все равно что то отвалилось при закрытии \n" + e);
+                System.out.println("РІСЃРµ СЂР°РІРЅРѕ С‡С‚Рѕ С‚Рѕ РѕС‚РІР°Р»РёР»РѕСЃСЊ РїСЂРё Р·Р°РєСЂС‹С‚РёРё \n" + e);
             }
         }
         if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
-                System.out.println("все равно что то отвалилось при закрытии \n" + e);
+                System.out.println("РІСЃРµ СЂР°РІРЅРѕ С‡С‚Рѕ С‚Рѕ РѕС‚РІР°Р»РёР»РѕСЃСЊ РїСЂРё Р·Р°РєСЂС‹С‚РёРё \n" + e);
             }
         }
     }
@@ -106,11 +106,11 @@ public class DBSupport_OracleConnectionPool {
 
         public void start() {
             super.start();
-            System.out.println("работу начал");
+            System.out.println("СЂР°Р±РѕС‚Сѓ РЅР°С‡Р°Р»");
         }
 
         public void finished() {
-            System.out.println("работу закончил");
+            System.out.println("СЂР°Р±РѕС‚Сѓ Р·Р°РєРѕРЅС‡РёР»");
         }
     }
 
@@ -133,7 +133,7 @@ public class DBSupport_OracleConnectionPool {
             watch.stop();
             System.out.println("watch = " + watch);
             /*if(!rs.next()){
-                System.out.println("почемуто ничего не прочитали");}*/
+                System.out.println("РїРѕС‡РµРјСѓС‚Рѕ РЅРёС‡РµРіРѕ РЅРµ РїСЂРѕС‡РёС‚Р°Р»Рё");}*/
     /*    int col=rs.getMetaData().getColumnCount();
         while (rs.next()){
             Vector prnVector=new Vector(col);

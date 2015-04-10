@@ -17,7 +17,7 @@ public class ValidatorTest {
         Assert.assertTrue(GenericValidator.isBlankOrNull(""));
         Assert.assertTrue(GenericValidator.isBlankOrNull(null));
         Assert.assertTrue(GenericValidator.isDate("20050929_1836", "yyyyMMdd_HHmm", true));
-        Assert.assertTrue(GenericValidator.isInRange(2, 1, 10));   //значение , мин , мах
-        Assert.assertTrue(GenericValidator.minLength("проверка длины", 5));
+        Assert.assertTrue(GenericValidator.isInRange(2, 1, 10));   //Р·РЅР°С‡РµРЅРёРµ , РјРёРЅ , РјР°С…
+        Assert.assertTrue(GenericValidator.minLength("РїСЂРѕРІРµСЂРєР° РґР»РёРЅС‹", 5));
     }
 }

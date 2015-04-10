@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * User: tor
  * Date: 21.09.11
  * Time: 14:40
- * Oracle® Database JDBC Developer's Guide and Reference 10g Release 1 (10.1) Part Number B10979-01
+ * OracleÂ® Database JDBC Developer's Guide and Reference 10g Release 1 (10.1) Part Number B10979-01
  */
 public class ExamplePooledConnection extends TestCase {
 
