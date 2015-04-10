@@ -1,14 +1,16 @@
 package com.tor.db;
 
-import junit.framework.TestCase;
+import com.sun.rowset.JdbcRowSetImpl;
 import oracle.jdbc.internal.StructMetaData;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 import oracle.sql.StructDescriptor;
+import org.junit.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.sql.rowset.JdbcRowSet;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
@@ -19,18 +21,16 @@ import java.util.Properties;
  * User: tor
  * Date: 13.09.11
  * Time: 13:03
- * To change this template use File | Settings | File Templates.
  */
-public class JDBCSample extends TestCase {
+public class JDBCSample extends Assert {
     private static final String JDBC_XPSERVER = "java:MyDB333";
     //    private static final String JDBC_XPSERVER = "java:comp/env/jdbc/xpserver";
-    private Connection connection = null;
-    private DataSource ds;
+    private static Connection connection = null;
+    private static DataSource ds;
 
-    public void setUp() throws Exception {
-        super.setUp();
+    @BeforeClass
+    public static void setUp() throws Exception {
         ds = initDS();
-
         connection = ds.getConnection();
     }
 
@@ -61,7 +61,7 @@ public class JDBCSample extends TestCase {
         return (DataSource) context.lookup(JDBC_XPSERVER);
     }
 
- private DataSource initDS() throws SQLException, NamingException {
+    private static DataSource initDS() throws SQLException, NamingException {
 
         OracleConnectionPoolDataSource pds = new OracleConnectionPoolDataSource();
         /*  pds.setServerName("xpserver");
@@ -82,6 +82,7 @@ public class JDBCSample extends TestCase {
         return pds;
     }
 
+    @Test
     public void testDatabaseMetaData() {
         DatabaseMetaData dbmd = null;
 
@@ -140,27 +141,46 @@ public class JDBCSample extends TestCase {
 
     }
 
-    public void testStructMetaData() {
-        try {
-            StructDescriptor structDescriptor = StructDescriptor.createDescriptor("DCT_LOCAL.SUBJECT", connection);
-            StructMetaData structMetaData = (StructMetaData) structDescriptor.getMetaData();
-            int count = structMetaData.getLocalColumnCount();
-            for (int i = 1; i < count; i++) {
-                StringBuffer buffer = new StringBuffer(i + ") ");
-                buffer.append(structMetaData.getColumnTypeName(i)).append(" ");
-                buffer.append(structMetaData.getColumnType(i)).append(" ");
-                buffer.append(structMetaData.getOracleColumnClassName(i)).append(" ");
-                buffer.append(structMetaData.isSearchable(i));
-                System.out.println(buffer.toString());
-            }
-        } catch (SQLException e) {
-            fail(e.toString());
+    @Test
+    @Ignore
+    /** сначала выполнить создание
+     * http://betteratoracle.com/posts/32-passing-arrays-of-record-types-between-oracle-and-java
+     * https://books.google.com.ua/books?id=T0GvgQYG070C&pg=PA1074&lpg=PA1074&dq=StructMetaData+java+example&source=bl&ots=ggY1gXQI5X&sig=26iq23fXRfDRiB1Rzc8iXKy4w18&hl=ru&sa=X&ei=FnwmVd7LNIW7swHM2oGADg&ved=0CFQQ6AEwCA#v=onepage&q&f=false*/
+    public void testStructMetaData() throws SQLException {
+        String sql = "create type student as object (id number, name varchar2(20)," +
+                "height float, dob date, picture BLOB,adress1 address_t, address2 ref address_t)";
+        StructDescriptor structDescriptor = StructDescriptor.createDescriptor("STUDENT", connection);
+        StructMetaData structMetaData = (StructMetaData) structDescriptor.getMetaData();
+        int count = structMetaData.getLocalColumnCount();
+        for (int i = 1; i < count; i++) {
+            StringBuffer buffer = new StringBuffer(i + ") ");
+            buffer.append(structMetaData.getColumnTypeName(i)).append(" ");
+            buffer.append(structMetaData.getColumnType(i)).append(" ");
+            buffer.append(structMetaData.getOracleColumnClassName(i)).append(" ");
+            buffer.append(structMetaData.isSearchable(i));
+            System.out.println(buffer.toString());
+        }
+    }
+    @Test
+    /** http://ramj2ee.blogspot.com/2014/08/jdbc-jdbcrowset-demo.html#.VSZs8F2sVeM */
+    public void testJdbcRowSet() throws SQLException {
+        JdbcRowSet rowSet = null;
+
+        /*javax.sql.rowset.RowSetFactory rowSetFactory=javax.sql.rowset.RowSetProvider.newFactory();
+         rowSet=rowSetFactory.createJdbcRowSet();*/
+
+        rowSet = new JdbcRowSetImpl(connection);
+        rowSet.setCommand("select * from dct_local.week_type");
+        rowSet.execute();
+        while (rowSet.next()) {
+            System.out.println(rowSet.getInt(1));
+            System.out.println(rowSet.getString(2));
         }
 
     }
 
-    public void tearDown() throws Exception {
-        super.tearDown();
+    @AfterClass
+    public static void tearDown() throws Exception {
       /*  InitialContext initialContext = new InitialContext();
         initialContext.unbind(JDBC_XPSERVER);
         initialContext.close();*/
