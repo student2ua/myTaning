@@ -11,7 +11,13 @@ import java.util.concurrent.CyclicBarrier;
  * $Rev::               $:  Revision of last commit
  * $Author::            $:  Author of last commit
  * $Date::              $:  Date of last commit
- * To change this template use File | Settings | File Templates.
+ * <p>
+ * Может использоваться для синхронизации заданного количества потоков в одной точке. Барьер достигается когда
+ * N-потоков вызовут метод await(...) и заблокируются. После чего счетчик сбрасывается в исходное значение, а
+ * ожидающие потоки освобождаются. Дополнительно, если нужно, существует возможность запуска специального кода
+ * до разблокировки потоков и сброса счетчика. Для этого через конструктор передается объект с реализацией Runnable
+ * интерфейса.
+ * </p>
  */
 public class CyclicBarrierExample {
 
