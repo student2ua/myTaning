@@ -13,7 +13,9 @@
 
     <modules>
         <module>minimal</module>
-       
+        <module>jsf_table</module>
+        <module>examples</module>
+
     </modules>
     <build>
         <pluginManagement>
