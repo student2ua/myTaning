@@ -21,7 +21,6 @@
         <version>0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.tor.myTraning</groupId>
     <artifactId>minimal</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>

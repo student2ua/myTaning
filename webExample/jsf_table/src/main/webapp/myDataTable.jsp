@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hello ${name}</title>
+    <title>Hello</title>
 
 </head>
 <body>
@@ -40,6 +40,5 @@
         <h:outputText value="#{usersBean.userListSize}"/>
     </f:facet>
 </h:dataTable>
-</body>
 </body>
 </html>

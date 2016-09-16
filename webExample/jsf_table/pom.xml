@@ -11,7 +11,7 @@
 
     <groupId>jsf_table</groupId>
     <artifactId>jsf_table</artifactId>
-    ]<version>0.1-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>javax</groupId>

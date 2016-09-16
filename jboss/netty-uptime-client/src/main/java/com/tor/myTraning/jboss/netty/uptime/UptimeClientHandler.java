@@ -20,31 +20,31 @@ import java.util.concurrent.TimeUnit;
  * Time: 16:22
  * To change this template use File | Settings | File Templates.
  */
-public class UptimeClientHandler extends SimpleChannelUpstreamHandler {
+public class UpTimeClientHandler extends SimpleChannelUpstreamHandler {
     private final ClientBootstrap bootstrap;
     private final Timer timer;
     private int startTime = -1;
 
-    public UptimeClientHandler(ClientBootstrap bootstrap, Timer timer) {
+    public UpTimeClientHandler(ClientBootstrap bootstrap, Timer timer) {
         this.bootstrap = bootstrap;
         this.timer = timer;
     }
 
     @Override
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        println("Disconected fron: " + getRemoteAdress());
+        println("Disconnected from: " + getRemoteAdress());
     }
 
     @Override
     public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        println("Sliping for: " + UptimeClient.RECONNECT_DELAY + "s");
+        println("Slipping for: " + UpTimeClient.RECONNECT_DELAY + "s");
         timer.newTimeout(new TimerTask() {
             @Override
             public void run(Timeout timeout) throws Exception {
                 println("reconnect to: " + getRemoteAdress());
                 bootstrap.connect();
             }
-        }, UptimeClient.RECONNECT_DELAY, TimeUnit.SECONDS);
+        }, UpTimeClient.RECONNECT_DELAY, TimeUnit.SECONDS);
     }
 
     @Override

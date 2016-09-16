@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
  * Date: 08.05.14
  * Time: 16:01
  */
-public class UptimeClient {
+public class UpTimeClient {
     public static final int RECONNECT_DELAY = 5;
     private static final int Read_TIMEOUT_SECONDS = 10;
     public static String host = "192.168.0.124";
@@ -34,7 +34,7 @@ public class UptimeClient {
 
         bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
             private final ChannelHandler timeOutHandler = new ReadTimeoutHandler(timer, Read_TIMEOUT_SECONDS);
-            private final ChannelHandler upTimeHandler = new UptimeClientHandler(bootstrap, timer);
+            private final ChannelHandler upTimeHandler = new UpTimeClientHandler(bootstrap, timer);
 
             @Override
             public ChannelPipeline getPipeline() throws Exception {
