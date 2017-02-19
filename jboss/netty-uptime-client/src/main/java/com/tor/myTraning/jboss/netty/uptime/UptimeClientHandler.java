@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  * User: tor
  * Date: 08.05.14
  * Time: 16:22
- * To change this template use File | Settings | File Templates.
  */
 public class UpTimeClientHandler extends SimpleChannelUpstreamHandler {
     private final ClientBootstrap bootstrap;
