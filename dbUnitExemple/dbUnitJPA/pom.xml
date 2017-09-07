@@ -7,10 +7,11 @@
     <artifactId>dbUnitJPA</artifactId>
     <version>0.1-SNAPSHOT</version>
     <parent>
-        <artifactId>dbUnitExemple</artifactId>
         <groupId>com.tor.myTraning</groupId>
+        <artifactId>dbUnitExamples</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
+
     <properties>
         <site>http://devcolibri.com/3575</site>
     </properties>

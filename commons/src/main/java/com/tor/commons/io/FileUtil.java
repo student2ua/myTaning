@@ -16,7 +16,7 @@ import java.util.Iterator;
  * Time: 13:56:07
  */
 public class FileUtil {
-    /** не юзать хюня какато*/
+    /** РЅРµ СЋР·Р°С‚СЊ С…СЋРЅСЏ РєР°РєР°С‚Рѕ*/
     public void moveConfig2Dir(String inDir,String outDir) throws IOException {
         Collection listConfigFile=getListOfAllConfigFiles(inDir);
         File outPath=new File(outDir);
