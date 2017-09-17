@@ -1,0 +1,8 @@
+<application-policy name="BasicAuthWebAppPolicy">
+    <authentication>
+        <login-module code="org.jboss.security.auth.spi.UsersRolesLoginModule" flag="required">
+            <module-option name="usersProperties">basicSecurityWebApp-users.properties</module-option>
+            <module-option name="rolesProperties">basicSecurityWebApp-roles.properties</module-option>
+        </login-module>
+    </authentication>
+</application-policy>
