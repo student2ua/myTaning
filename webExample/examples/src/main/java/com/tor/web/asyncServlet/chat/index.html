@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Servlet 3.0 example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function(){
+        function getData() {
+            $.ajax({
+                url: "chat",
+                type: "GET",
+                dataType: "xml",
+                context: document.body,
+                success: function(data){
+                    var username = $(data).find('username').text();
+                    var text = $(data).find('text').text();
+                    var history = $('#chat_msgs').text();
+                    $('#chat_msgs').html(history + username + ": " + text + "\n");
+                    getData();
+                }
+            });
+        }
+        $("#sendMsg").click(function(event){
+            $.post("chat", $("#msgForm").serialize());
+            $('#message').val('');
+        });
+
+        getData();
+    });
+</script>
+<h3>Asynchronous Servlet 3.0 Based Reverse Ajax Chat</h3>
+<textarea cols="60" rows="5" id="chat_msgs" name="chat_msgs"></textarea>
+<br/>
+<form id="msgForm" name="msgForm">
+    Username: <input type="text" id="username" name="username" value="" />
+    Message: <input type="text" id="message" name="message" value="" />
+</form>
+<br/>
+<input type="submit" id="sendMsg" name="sendMsg" value="Send message" />
+</body>
+</html>
