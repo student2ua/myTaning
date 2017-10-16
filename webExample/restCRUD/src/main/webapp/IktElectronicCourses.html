@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>AJAX based CRUD operations using jTable in Servlet and JSP</title>
+    <!-- Include one of jTable styles. -->
+    <link href="css/metro/crimson/jtable.css" rel="stylesheet" type="text/css"/>
+    <link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css"/>
+    <!-- Include jTable script file. -->
+    <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
+    <script src="js/jquery.jtable.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#IKTElectronicCoursesTable').jtable({
+                title: 'Table of people',
+                actions: {
+//                listAction: 'CRUDController?action=list',
+              /*  listAction: function (postData, jtParams) {
+               return {
+               "Result": "OK",
+               "Records": [
+               { "StudentId": 39, "ContinentalId": 1, "CountryId": 18, "CityId": 55, "Name": "Agatha Garcia", "EmailAddress": "agatha.garcia@jtable.org", "Password": "123", "Gender": "F", "BirthDate": "\/Date(-1125111600000)\/", "About": "", "Education": 2, "IsActive": true, "RecordDate": "\/Date(1369083600000)\/" },
+               { "StudentId": 61, "ContinentalId": 4, "CountryId": 1, "CityId": 1, "Name": "Agatha Lafore", "EmailAddress": "agatha.lafore@jtable.org", "Password": "123", "Gender": "F", "BirthDate": "\/Date(1017694800000)\/", "About": "", "Education": 3, "IsActive": true, "RecordDate": "\/Date(1393192800000)\/" }],
+               "TotalRecordCount": 2
+               };*/
+                    listAction: function (postData, jtParams) {
+                        return $.Deferred(function ($dfd) {
+                            console.log("Loading from function...");
+                            $.ajax({
+                                url: '/iktelectroniccourses/?start=' + jtParams.jtStartIndex + '&max=' + (jtParams.jtStartIndex + jtParams.jtPageSize) + '&jtSorting=' + jtParams.jtSorting,
+                                type: 'GET',
+                                dataType: 'json',
+                                data: postData,
+                                success: function (data) {
+                                    $dfd.resolve('"Result":"OK","Records:"'+data+'}');
+                                },
+                                error: function () {
+                                    $dfd.reject();
+                                }
+                            });
+                        });
+                    },
+                   /* createAction: 'CRUDController?action=create',
+                    updateAction: 'CRUDController?action=update',
+                    deleteAction: 'CRUDController?action=delete'*/
+                    deleteAction: function (postData) {
+                        console.log("deleting from custom function...");
+                        return $.Deferred(function ($dfd) {
+                            $.ajax({
+                                url: '/iktelectroniccourses/',
+                                type: 'DELETE',
+                                dataType: 'json',
+                                data: postData,
+                                success: function (data) {
+                                    $dfd.resolve(data);
+                                },
+                                error: function () {
+                                    $dfd.reject();
+                                }
+                            });
+                        });
+                    },
+                    createAction: function (postData) {
+                        console.log("creating from custom function...");
+                        return $.Deferred(function ($dfd) {
+                            $.ajax({
+                                url: '/iktelectroniccourses/',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: postData,
+                                success: function (data) {
+                                    $dfd.resolve(data);
+                                },
+                                error: function () {
+                                    $dfd.reject();
+                                }
+                            });
+                        });
+                    },
+                    updateAction: function(postData) {
+                        console.log("updating from custom function...");
+                        return $.Deferred(function ($dfd) {
+                            $.ajax({
+                                url: '/iktelectroniccourses/',
+                                type: 'PUT',
+                                dataType: 'json',
+                                data: postData,
+                                success: function (data) {
+                                    $dfd.resolve(data);
+                                },
+                                error: function () {
+                                    $dfd.reject();
+                                }
+                            });
+                        });
+                    }
+                },
+                fields: {
+                    id: {
+                        title: 'ID',
+                        key: true,
+                        list: true,
+                        create: true,
+                        edit:true
+                    },
+                    name: {
+                        title: 'Name',
+                        width: '30%',
+                        edit: true
+                    },
+                    shortname: {
+                        title: 'shortname',
+                        width: '30%',
+                        edit: true
+                    },
+                    departmentId: {
+                        title: 'departmentId',
+                        width: '20%',
+                        options: function () {
+
+                            if (cachedCityOptions) { //Check for cache
+                                return cachedCityOptions;
+                            }
+
+                            var options = [];
+
+                            $.ajax({ //Not found in cache, get from server
+                                url: '/Demo/GetCityOptions',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: false,
+                                success: function (data) {
+                                    if (data.Result != 'OK') {
+                                        alert(data.Message);
+                                        return;
+                                    }
+                                    options = data.Options;
+                                }
+                            });
+
+                            return cachedCityOptions = options; //Cache results and return options
+                        }
+                    }
+                }
+            });
+            $('#IKTElectronicCoursesTable').jtable('load');
+        });
+    </script>
+</head>
+<body>
+<div style="width:60%;margin-right:20%;margin-left:20%;text-align:center;">
+    <h1>http://www.jtable.org/Demo/FunctionsAsActions</h1>
+    <div id="IKTElectronicCoursesTable"></div>
+</div>
+</body>
+</html>
