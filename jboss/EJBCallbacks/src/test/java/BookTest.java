@@ -26,7 +26,8 @@ public class BookTest {
     @Before
     public void setUp() throws Exception {
         Properties properties = new Properties();
-        properties.load(this.getClass().getResourceAsStream("jndi.properties"));
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("jndi.properties"));
+//        properties.load(this.getClass().getResourceAsStream("jndi.properties"));
         context = new InitialContext(properties);
         brConsoleReader = new BufferedReader(new InputStreamReader(System.in));
     }

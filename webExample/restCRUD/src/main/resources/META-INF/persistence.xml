@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="rest_CRUD_PU" >
+    <description>Forge Persistence Unit</description>
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:/app-DataSource</jta-data-source>
+      <!--<jta-data-source>jboss/datasources/ExampleDS</jta-data-source>-->
+       <exclude-unlisted-classes>false</exclude-unlisted-classes>
+      <properties>
+          <property name="hibernate.show_sql" value="true" />
+          <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9iDialect" />
+          <property name="hibernate.hbm2ddl.auto" value="validate" />
+          <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+          <property name="hibernate.jdbc.use_get_generated_keys" value="false" />
+      </properties>
+  </persistence-unit>
+   <!-- <persistence-unit name="rest_CRUD_Oracle" transaction-type="JTA">
+    <description>Forge Persistence Unit</description>
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      &lt;!&ndash;<exclude-unlisted-classes>false</exclude-unlisted-classes>&ndash;&gt;
+        <class >com.tor.web.model.IktElectronicCourses</class>
+      <properties>
+          &lt;!&ndash;<property name="hibernate.hbm2ddl.auto" value="create-drop" />&ndash;&gt;
+          <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
+          <property name="hibernate.connection.username" value="app"/>
+          <property name="hibernate.connection.password" value="app"/>
+          <property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.0.44:1521:accotest"/>
+          <property name="hibernate.show_sql" value="true" />
+          <property name="hibernate.hbm2ddl.auto" value="validate" />
+          &lt;!&ndash;Disabling contextual LOB creation as createClob()&ndash;&gt;
+          <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+
+          &lt;!&ndash;<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9iDialect" />&ndash;&gt;
+          &lt;!&ndash; default <property name="hibernate.jdbc.use_get_generated_keys" value="false" />&ndash;&gt;
+          <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9Dialect" />
+      </properties>
+  </persistence-unit>-->
+   <!-- <persistence-unit name="jee6petclinic">
+        <jta-data-source>java:/DefaultDS</jta-data-source>
+          <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            &lt;!&ndash; <property name="hibernate.hbm2ddl.auto" value="create-drop"/> &ndash;&gt;
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            &lt;!&ndash; <property name="hibernate.hbm2ddl.auto" value="validate"/> &ndash;&gt;
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.generate_statistics" value="true"/>
+            <property name="jpa.showSql" value="false"/>
+
+            <property name="hibernate.search.default.directory_provider"
+                      value="filesystem"/>
+
+            <property name="hibernate.search.default.indexBase"
+                      value="."/>
+        </properties>
+    </persistence-unit>-->
+
+</persistence>

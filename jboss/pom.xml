@@ -14,8 +14,9 @@
     <modules>
         <module>netty</module>
         <module>netty-echo</module>
-        <module>JBossRS</module>
+        <module>netty-javaFX</module>
         <module>netty-uptime-client</module>
+        <module>JBossRS</module>
         <module>EJBCallbacks</module>
         <!--<module>Asynchron</module>-->
         <module>AsyncUtilsExample</module>
