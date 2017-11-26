@@ -14,7 +14,10 @@
     <modules>
         <module>minimal</module>
         <module>jsf_table</module>
+        <module>authentication</module>
         <module>examples</module>
+        <module>restCRUD</module>
+        <module>UploadServlet30</module>
 
     </modules>
     <build>
