@@ -12,20 +12,20 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-//http://localhost:8080/servlet3Upload/jpload.jsp
+//http://localhost:8080/UploadServlet30/upload.jsp
 @WebServlet(urlPatterns = "/UploadServlet", description = "This is my first annotated servlet",
         asyncSupported = true,
         initParams = {
                 @WebInitParam(name = "saveDir", value = "D:/FileUpload"),
                 @WebInitParam(name = "allowedTypes", value = "jpg,jpeg,gif,png")
         })
-@ServletSecurity(
+  /* @ServletSecurity(
         httpMethodConstraints = {
                 @HttpMethodConstraint(value = "GET", rolesAllowed = "admin"),
-               /* @HttpMethodConstraint(value = "POST", rolesAllowed = "admin",
-                        transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL),*/
+             @HttpMethodConstraint(value = "POST", rolesAllowed = "admin",
+                        transportGuarantee = ServletSecurity.TransportGuarantee.CONFIDENTIAL),
         }
-)
+)*/
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,    // 2MB
         maxFileSize = 1024 * 1024 * 10,        // 10MB
         maxRequestSize = 1024 * 1024 * 50)    // 50MB
