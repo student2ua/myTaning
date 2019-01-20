@@ -18,7 +18,8 @@ public class Publisher implements Serializable {
     }
 
     public Publisher(String publisherName, String publisherAddress) {
-        //To change body of created methods use File | Settings | File Templates.
+        this.address = publisherAddress;
+        this.name = publisherName;
     }
 
     public String getName() {
