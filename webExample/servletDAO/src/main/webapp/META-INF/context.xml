@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource
+            name="jdbc/dbOracle" type="javax.sql.DataSource"
+            maxActive="100" maxIdle="30" maxWait="10000"
+            url="jdbc:oracle:thin:@192.168.0.44:1521:acco2018"
+            driverClassName="oracle.jdbc.driver.OracleDriver"
+            username="app" password="app"
+            />
+</Context>

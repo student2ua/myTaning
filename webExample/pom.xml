@@ -18,6 +18,7 @@
         <module>examples</module>
         <module>restCRUD</module>
         <module>UploadServlet30</module>
+        <module>servletDAO</module>
 
     </modules>
     <build>
