@@ -46,6 +46,7 @@ public class CountriesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String delete = request.getParameter("delete");
 
 
@@ -58,15 +59,18 @@ public class CountriesServlet extends HttpServlet {
             if (save != null) { // Is the save button pressed? (note: if empty then no country ID was supplied, which means that it's "add country".
                 Country country = (save.isEmpty()) ? new Country() : countryDAO.find(Integer.valueOf(save));
                 country.setCountryName(request.getParameter("countryName"));
-                country.setCheck(Integer.parseInt(request.getParameter("isCheck"))==0);
-                country.setSortLevel(Integer.parseInt(request.getParameter("sortLevel")));
+                String isCheck = request.getParameter("isCheck");
+                country.setCheck(isCheck != null&&!isCheck.isEmpty() && Integer.parseInt(isCheck) == 0);
+                String sortLevel = request.getParameter("sortLevel");
+                country.setSortLevel(sortLevel != null&&!sortLevel.isEmpty()&&!sortLevel.equalsIgnoreCase("null") ? Integer.parseInt(sortLevel) : 0);
                 country.setCapital(request.getParameter("capital"));
                 country.setShortName(request.getParameter("shortName"));
-                country.setCodeIso(Integer.parseInt(request.getParameter("codeIso")));
+                String codeIso = request.getParameter("codeIso");
+                country.setCodeIso(codeIso!=null&&!codeIso.isEmpty()&& !codeIso.equalsIgnoreCase("null") ?Integer.parseInt(codeIso):0);
                 countryDAO.save(country);
             }
             response.sendRedirect(request.getContextPath() + "/countries"); // Refresh page with table.
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new ServletException("Cannot obtain countries from DB", e);
         }
     }

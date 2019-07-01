@@ -69,21 +69,24 @@ public class CountryDAO implements DAO<Country, Integer> {
         return null;
     }
 
-    public boolean save(Country country) throws SQLException {
+    public boolean save(Country country) throws Exception {
         String sql = "INSERT INTO DCT_COMMON.COUNTRY (COUNTRYID, COUNTRYNAME, ISCHECK, SORTLEVEL, CAPITAL, SHORTNAME, CODE_ISO) VALUES " +
-                "(?, ?, ?, ?, ?, ?, ?)";
+                "(DCT_COMMON.COUNTRY_SEQ.nextval, ?, ?, ?, ?, ?, ?)";
         boolean rez = false;
         Connection connection = null;
         try {
             connection = ds.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, country.getCountryId());
-            statement.setString(2, country.getCountryName());
-            statement.setInt(3, country.getCheck() ? 1 : 0);
-            statement.setInt(4, country.getSortLevel());
-            statement.setString(5, country.getCapital());
-            statement.setString(6, country.getShortName());
-            statement.setInt(7, country.getCodeIso());
+//            statement.setInt(1, country.getCountryId());
+            statement.setString(1, country.getCountryName());
+            statement.setInt(2, country.getCheck() ? 1 : 0);
+            statement.setInt(3, country.getSortLevel());
+            statement.setString(4, country.getCapital());
+            statement.setString(5, country.getShortName());
+            statement.setInt(6, country.getCodeIso());
+
+            System.err.println("country = " + country);
+
             int resultSet = statement.executeUpdate();
             rez = resultSet > 0;
         } finally {
@@ -107,6 +110,9 @@ public class CountryDAO implements DAO<Country, Integer> {
             statement.setString(5, country.getShortName());
             statement.setInt(6, country.getCodeIso());
             statement.setInt(7, country.getCountryId());
+
+            System.err.println("update.country = " + country);
+
             int resultSet = statement.executeUpdate();
             rez = resultSet > 0;
         } finally {
@@ -120,7 +126,7 @@ public class CountryDAO implements DAO<Country, Integer> {
         return delete(country.getCountryId());
     }
 
-    public boolean delete(Integer pk) throws SQLException {
+    public boolean delete(Integer pk) throws Exception {
         Connection connection = null;
         try {
             connection = ds.getConnection();

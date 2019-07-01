@@ -79,4 +79,17 @@ public class Country {
     public void setCodeIso(Integer codeIso) {
         this.codeIso = codeIso;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("countryId=").append(countryId);
+        sb.append(", countryName='").append(countryName).append('\'');
+        sb.append(", isCheck=").append(isCheck);
+        sb.append(", sortLevel=").append(sortLevel);
+        sb.append(", capital='").append(capital).append('\'');
+        sb.append(", shortName='").append(shortName).append('\'');
+        sb.append(", codeIso=").append(codeIso);
+        return sb.toString();
+    }
 }
