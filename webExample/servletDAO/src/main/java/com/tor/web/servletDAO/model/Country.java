@@ -1,4 +1,4 @@
-package com.tor.web.servletDAO;
+package com.tor.web.servletDAO.model;
 
 /**
  * User: Admin
@@ -91,5 +91,15 @@ public class Country {
         sb.append(", shortName='").append(shortName).append('\'');
         sb.append(", codeIso=").append(codeIso);
         return sb.toString();
+    }
+    public String toJSON() {
+        return "{"
+                + " \"countryId\":\"" + countryId + "\""
+                + ", \"countryName\":\"" + countryName + "\""
+                + ", \"isCheck\":\"" + isCheck + "\""
+                + ", \"sortLevel\":\"" + sortLevel + "\""
+                + ",\"capital\":\"" + capital + "\""
+                + ", \"codeIso\":\"" + codeIso + "\""
+                + "}";
     }
 }

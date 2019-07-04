@@ -1,5 +1,7 @@
 package com.tor.web.servletDAO;
 
+import com.tor.web.servletDAO.model.Country;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

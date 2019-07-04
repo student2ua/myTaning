@@ -1,4 +1,7 @@
-package com.tor.web.servletDAO;
+package com.tor.web.servletDAO.servlet;
+
+import com.tor.web.servletDAO.CountryDAO;
+import com.tor.web.servletDAO.model.Country;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
