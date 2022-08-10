@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>https://habr.com/ru/company/timeweb/blog/681422/</title>
+    <style type="text/css">
+        input.placeholder {
+            color: #0275d8;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        input:-moz-placeholder {
+            color: #0275d8;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        input::-moz-placeholder {
+            color: #0275d8;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        input:-ms-input-placeholder {
+            color: #0275d8;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #0275d8;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+    </style>
+    <style type="text/css">
+        input:invalid:not(:hover, :focus) {
+            border-color: red;
+        }
+
+            /* отключаем подсветку */
+        :invalid {
+            box-shadow: none;
+        }
+
+        :-moz-submit-invalid {
+            box-shadow: none;
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none;
+        }
+    </style>
+
+    <style type="text/css">
+        .form-field {
+            color: darkslategray;
+            position: relative;
+            width: max-content;
+        }
+
+        .form-field label {
+            align-items: center;
+            display: flex;
+        }
+
+        .form-field input {
+            border: 2px solid darkslategray;
+            margin-left: 0.5rem;
+            outline: none;
+            padding: 0.5rem;
+            /* отступ для иконки - 20px + 5px + 5px */
+            padding-right: 30px;
+        }
+
+        .form-field svg {
+            height: 20px;
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+        }
+
+        .form-field input:hover {
+            border-color: deepskyblue;
+        }
+
+        .form-field input:focus {
+            border-color: mediumseagreen;
+        }
+
+        .form-field:hover {
+            color: deepskyblue;
+        }
+
+            /*div не является фокусируемым (focusable) использовать :focus-within */
+        .form-field:focus-within {
+            color: mediumseagreen;
+        }
+    </style>
+
+    <style type="text/css">
+        .select-menu::part(button) {
+            background-color: #f00;
+            border-radius: 5px;
+            color: white;
+            padding: 5px;
+        }
+
+        .select-menu::part(listbox) {
+            border-radius: 5px;
+            border: 1px solid red;
+            margin-top: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<label> test
+    <input type="text" placeholder="Enter some text..." required/>
+</label>
+<label> sample
+    <input type="text" placeholder="Enter some text..."/>
+</label>
+<br>
+<br>
+
+<div class="form-field">
+    <label>
+        <span>Some text:</span>
+        <input type="text" placeholder="Enter some text..." required/>
+    </label>
+    <svg viewBox="0 0 60 60">
+        <path
+                d="M48.014,42.889l-9.553-4.776C37.56,37.662,37,36.756,37,35.748v-3.381c0.229-0.28,0.47-0.599,0.719-0.951
+c1.239-1.75,2.232-3.698,2.954-5.799C42.084,24.97,43,23.575,43,22v-4c0-0.963-0.36-1.896-1-2.625v-5.319
+c0.056-0.55,0.276-3.824-2.092-6.525C37.854,1.188,34.521,0,30,0s-7.854,1.188-9.908,3.53C17.724,6.231,17.944,9.506,18,10.056
+v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309
+c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C8.801,44.424,7,47.458,7,50.762V54c0,4.746,15.045,6,23,6s23-1.254,23-6v-3.043
+C53,47.519,51.089,44.427,48.014,42.889z"
+                fill="currentColor"
+                />
+    </svg>
+</div>
+<br>
+<br>
+<br>
+<label>selectmenu not work?
+    <selectmenu class="select-menu">
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+    </selectmenu>
+</label>
+
+</body>
+</html>

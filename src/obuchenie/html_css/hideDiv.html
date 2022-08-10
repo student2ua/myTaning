@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Переключение дисплея</title>
+    <!--<script src="/js/c.js?v3" type="c9997e6c19eac02efe105466-text/javascript"></script>-->
+    <style type="text/css">
+        .target {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+<button id="toggle-button">Toggle display</button>
+<span class="target">Toggle the span.</span>
+
+<div class="target">Toggle the div.</div>
+<p>http://qaru.site/questions/46064/showhide-div-using-javascript</p>
+
+<p>
+    Аналогично, если вы хотите переключить элемент display элемента или коллекции элементов, вы можете просто перебрать
+    каждый элемент и определить, видно ли это, проверив вычисленное значение свойства display. Если он отображается,
+    установите для параметра display значение none, в противном случае удалите встроенный стиль display, и если он все
+    еще скрыт, установите display в указанное значение или по умолчанию для жесткого кодирования, block
+    ps скрипт должен грузится последним
+</p>
+<script language="JavaScript">
+    document.getElementById('toggle-button').addEventListener('click', function () {
+        toggle(document.querySelectorAll('.target'));
+    });
+
+    function toggle(elements, specifiedDisplay) {
+        var element, index;
+
+        elements = elements.length ? elements : [elements];
+        for (index = 0; index < elements.length; index++) {
+            element = elements[index];
+
+            if (isElementHidden(element)) {
+                element.style.display = '';
+
+                // If the element is still hidden after removing the inline display
+                if (isElementHidden(element)) {
+                    element.style.display = specifiedDisplay || 'block';
+                }
+            } else {
+                element.style.display = 'none';
+            }
+        }
+        function isElementHidden(element) {
+            return window.getComputedStyle(element, null).getPropertyValue('display') === 'none';
+        }
+    }
+</script>
+</body>
+</html>
