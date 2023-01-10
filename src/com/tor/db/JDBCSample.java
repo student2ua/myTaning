@@ -3,17 +3,24 @@ package com.tor.db;
 import com.sun.rowset.JdbcRowSetImpl;
 import oracle.jdbc.internal.StructMetaData;
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
+import oracle.jdbc.rowset.OracleRowSetListenerAdapter;
+import oracle.jdbc.rowset.OracleWebRowSet;
 import oracle.sql.StructDescriptor;
+import org.intellij.lang.annotations.Language;
 import org.junit.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.sql.RowSet;
+import javax.sql.RowSetEvent;
+import javax.sql.RowSetListener;
 import javax.sql.rowset.JdbcRowSet;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.*;
 import java.util.Properties;
 
 /**
@@ -43,7 +50,7 @@ public class JDBCSample extends Assert {
         /*  pds.setServerName("xpserver");
         pds.setPortNumber(1521);
         pds.setDatabaseName("accoi");*/
-        pds.setURL("jdbc:oracle:thin:@ann:1521:accotest");
+        pds.setURL("jdbc:oracle:thin:@ann:1521:acco2018");
         pds.setUser("APP");
         pds.setPassword("APP");
         InitialContext ct = new InitialContext(properties);
@@ -67,7 +74,7 @@ public class JDBCSample extends Assert {
         /*  pds.setServerName("xpserver");
         pds.setPortNumber(1521);
         pds.setDatabaseName("accoi");*/
-        pds.setURL("jdbc:oracle:thin:@ann:1521:accotest");
+        pds.setURL("jdbc:oracle:thin:@192.168.31.245:1521:acco245");
         pds.setUser("APP");
         pds.setPassword("APP");
 
@@ -125,7 +132,8 @@ public class JDBCSample extends Assert {
             System.out.println("getMaxStatements() " + dbmd.getMaxStatements());
             System.out.println("getMaxTablesInSelect() " + dbmd.getMaxTablesInSelect());
             System.out.println("getExtraNameCharacters() " + dbmd.getExtraNameCharacters());
-            System.out.println("getDefaultTransactionIsolation() " + dbmd.getDefaultTransactionIsolation());
+            System.out.println("getDefaultTransactionIsolation() " + getNameByTransactionIsolation(dbmd.getDefaultTransactionIsolation()));
+
             System.out.println("---------------------------");
             System.out.println("getNumericFunctions() " + dbmd.getNumericFunctions());
             System.out.println("getStringFunctions() " + dbmd.getStringFunctions());
@@ -139,6 +147,31 @@ public class JDBCSample extends Assert {
             fail();
         }
 
+    }
+
+    private String getNameByTransactionIsolation(int intTransactionIsolation) {
+        String rez = "";
+        switch (intTransactionIsolation) {
+            case Connection.TRANSACTION_READ_UNCOMMITTED: {
+                rez = "TRANSACTION_READ_UNCOMMITTED";
+                break;
+            }
+            case Connection.TRANSACTION_READ_COMMITTED: {
+                rez = "TRANSACTION_READ_COMMITTED";
+                break;
+            }
+            case Connection.TRANSACTION_REPEATABLE_READ: {
+                rez = "TRANSACTION_REPEATABLE_READ";
+                break;
+            }
+            case Connection.TRANSACTION_SERIALIZABLE: {
+                rez = "TRANSACTION_SERIALIZABLE";
+                break;
+            }
+            default:
+                rez = "Error value " + intTransactionIsolation;
+        }
+        return rez;
     }
 
     @Test
@@ -161,6 +194,7 @@ public class JDBCSample extends Assert {
             System.out.println(buffer.toString());
         }
     }
+
     @Test
     /** http://ramj2ee.blogspot.com/2014/08/jdbc-jdbcrowset-demo.html#.VSZs8F2sVeM */
     public void testJdbcRowSet() throws SQLException {
@@ -170,13 +204,142 @@ public class JDBCSample extends Assert {
          rowSet=rowSetFactory.createJdbcRowSet();*/
 
         rowSet = new JdbcRowSetImpl(connection);
-        rowSet.setCommand("select * from dct_local.week_type");
+        @Language("SQL")
+        final String cmd = "SELECT * FROM dct_local.week_type";
+        rowSet.setCommand(cmd);
         rowSet.execute();
+        while (rowSet.next()) {
+            System.out.println(rowSet.getInt(1) + "\t" + rowSet.getString(2));
+        }
+
+    }
+
+    @Test   //https://docs.oracle.com/cd/E11882_01/java.112/e16548/jcrowset.htm#JJDBC28636
+    public void testRowSet() throws SQLException {
+          /*javax.sql.rowset.RowSetFactory rowSetFactory=javax.sql.rowset.RowSetProvider.newFactory();
+         rowSet=rowSetFactory.createJdbcRowSet();*/
+        RowSet rowSet = new JdbcRowSetImpl(connection);
+//        rowSet.setUrl("jdbc:oracle:oci:@");
+//        rowSet.setUsername("SCOTT");
+//        rowSet.setPassword("TIGER");
+//        rowSet.setCommand("SELECT empno, ename, sal FROM emp");
+        rowSet.addRowSetListener(new RowSetListener() {
+            @Override
+            public void rowSetChanged(RowSetEvent event) {
+            }
+
+            @Override
+            public void rowChanged(RowSetEvent event) {
+            }
+
+            @Override
+            public void cursorMoved(RowSetEvent event) {
+            }
+        });
+
+        rowSet.addRowSetListener(new OracleRowSetListenerAdapter() {
+            @Override
+            public void rowChanged(RowSetEvent rowSetEvent) {
+                super.rowChanged(rowSetEvent);
+            }
+        });
+        @Language("SQL")
+        final String cmd = "SELECT humanid, lastname FROM human.human WHERE humanid = ?";
+        rowSet.setCommand(cmd);
+        // setting the employee number input parameter for employee named "KING"
+        rowSet.setInt(1, 7839);
+        rowSet.execute();
+        // going to the first row of the rowset
+        rowSet.beforeFirst();
+
         while (rowSet.next()) {
             System.out.println(rowSet.getInt(1));
             System.out.println(rowSet.getString(2));
         }
+        /**
+         * Make rowset updatable
+         */
+        rowSet.setReadOnly(false);
+/**
+ * Inserting a row in the 5th position of the rowset.
+ */
+// moving the cursor to the 5th position in the rowset
+        if (rowSet.absolute(5)) {
+            rowSet.moveToInsertRow();
+            rowSet.updateInt(1, 193);
+            rowSet.updateString(2, "Ashok");
+            rowSet.updateInt(3, 7200);
 
+            // inserting a row in the rowset
+            rowSet.insertRow();
+
+            // Synchronizing the data in RowSet with that in the database.
+//            rowSet.acceptChanges (); ???
+
+        }
+    }
+
+    @Test   //https://docs.oracle.com/cd/E11882_01/java.112/e16548/jcrowset.htm#JJDBC28636
+    public void testWebRowSet() throws SQLException {
+        Statement stmt = connection.createStatement();
+        ResultSet rset = stmt.executeQuery("SELECT * FROM employee.employee");
+        OracleWebRowSet wset = new OracleWebRowSet();
+        wset.populate(rset);
+        try {
+            // Create a java.io.Writer object
+            FileWriter out = new FileWriter("xml.out");
+            // Now generate the XML and write it out
+            wset.writeXml(out);
+        } catch (IOException exc) {
+            System.out.println("Couldn't construct a FileWriter");
+        }
+        System.out.println("XML output file generated.");
+
+// Create a new OracleWebRowSet for reading from XML input
+        OracleWebRowSet wset2 = new OracleWebRowSet();
+
+// Use Oracle JAXP SAX parser
+        System.setProperty("javax.xml.parsers.SAXParserFactory", "oracle.xml.jaxp.JXSAXParserFactory");
+
+        try {
+            // Use the preceding output file as input
+            FileReader fr = new FileReader("xml.out");
+
+            // Now read XML stream from the FileReader
+            wset2.readXml(fr);
+        } catch (IOException exc) {
+            System.out.println("Couldn't construct a FileReader");
+        }
+    }
+
+    /**
+     * see https://stackoverflow.com/questions/25607985/get-inserted-row-to-oracle-with-java
+     */
+    @Test
+    public void testReturnIdOnInsert() throws SQLException {
+        Statement stmt = connection.createStatement();
+        final String sql = "INSERT INTO DCT_COMMON.ACADEMICDEGREE  VALUES (DCT_COMMON.ACADEMICDEGREE_SEQ.NEXTVAL ,'Test 3 return id')";
+        final int rezUdate = stmt.executeUpdate(
+                sql,
+//                Statement.RETURN_GENERATED_KEYS);Недопустимый тип столбца: getLong not implemented for class oracle.jdbc.driver.T4CRowidAccessor
+                new String[]{"ID"});
+
+//        ResultSet rs = stmt.getGeneratedKeys();
+//        rs.next();
+//        long pk = rs.getLong("ID");
+        long pk = 0;
+        if (rezUdate > 0) {
+
+            // getGeneratedKeys() returns result set of keys that were auto generated
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+
+            // if resultset has data, get the primary key value of last inserted record
+            if (null != generatedKeys && generatedKeys.next()) {
+                pk = generatedKeys.getLong(1);
+            }
+        }
+        Assert.assertNotNull(pk);
+        System.out.println("pk = " + pk);
     }
 
     @AfterClass
