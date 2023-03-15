@@ -45,11 +45,19 @@
 #### @TearDown
 Аннотации на уровне метода, роль этой аннотации заключается в том, что нам нужно сделать некоторые TearDown, такие как закрытие пулов потоков, подключения к базе данных и т. Д. В основном используются для восстановления ресурсов.
 
-| Benchmark                             | Mode  | Cnt      | Score      |  Error  | Units |
-|---------------------------------------|-------|----------|------------|---------|-------|
-|StringBenchmark.testConcat             | thrpt |  20      |10528,067 �|2852,083 | ops/s |
-|StringBenchmark.testFormat             | thrpt |  20      |531,340 �  | 28,709  | ops/s|
-|ConcatVsValueOfBenchmark.concat        | avgt  |  200     |51,514 �   | 1,219   |ns/op |
-|ConcatVsValueOfBenchmark.valueOf       | avgt  |  200     |57,925 �   | 4,087   |ns/op |
-|ConcatVsValueOfObjectBenchmark.concat  | avgt  |   200    |282,505 �  | 16,564  |ns/op |
-|ConcatVsValueOfObjectBenchmark.valueOf | avgt  |   200    |172,316 �  | 5,389   |ns/op |
+| Benchmark                            | (delay)| Mode  | Cnt      | Score         |  Error  | Units |
+|--------------------------------------|--------|-------|----------|---------------|---------|-------|
+|StringBenchmark.testConcat            | N/A    | thrpt |  20      |10528,067 �   |2852,083 | ops/s |
+|StringBenchmark.testFormat            | N/A    | thrpt |  20      |531,340 �     | 28,709  | ops/s|
+|ConcatVsValueOfBenchmark.concat       | N/A    | avgt  |  200     |51,514 �      | 1,219   |ns/op |
+|ConcatVsValueOfBenchmark.valueOf      | N/A    | avgt  |  200     |57,925 �      | 4,087   |ns/op |
+|ConcatVsValueOfObjectBenchmark.concat | N/A    | avgt  |  200     |282,505 �     | 16,564  |ns/op |
+|ConcatVsValueOfObjectBenchmark.valueOf| N/A    | avgt  |  200     |172,316 �     | 5,389   |ns/op |
+|ParkNanosBenchmark.parkNanos          |    10  |  avgt |  200     |15955334,180 �| 12022,200 | ns/op|
+| ParkNanosBenchmark.parkNanos         |    100 |  avgt |  200     |15962258,330 � | 40286,974 |ns/op |
+| ParkNanosBenchmark.parkNanos         |   1000 | avgt  |  200     |17297464,046 � |2241722,585 |ns/op  |
+| ParkNanosBenchmark.parkNanos         |  10000 | avgt  |  200     |15951940,438 � | 21966,697 |ns/op  |
+| ParkNanosBenchmark.parkNanos         | 1000000|  avgt |  200     | 15939726,045 � | 11349,578| ns/op |
+## Links
+- [Производительность: нюансы против очевидностей. JDK edition](https://habr.com/ru/post/672146/)
+- [Холостые циклы в Java](https://habr.com/ru/post/674116/)

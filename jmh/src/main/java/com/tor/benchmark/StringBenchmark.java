@@ -23,7 +23,7 @@ public class StringBenchmark {
     private static final int LOOPS = 1000;
 
     @Benchmark
-    public int testOld() {
+    public int testConcat() {
         int counter = 0;
         for (int i = 0; i < LOOPS; i++) {
             String s = "What do you get if you multiply " + counter + " by " + counter + "?";
@@ -33,7 +33,7 @@ public class StringBenchmark {
     }
 
     @Benchmark
-    public int testNew() {
+    public int testFormat() {
         int counter = 0;
         for (int i = 0; i < LOOPS; i++) {
             String s = String.format("What do you get if you multiply %d by %d?", counter, counter);
