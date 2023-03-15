@@ -11,10 +11,14 @@ import org.apache.commons.lang.reflect.MethodUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
+import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.Map;
+
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,7 +29,7 @@ import java.util.Map;
  */
 public class LangsTest {
 
-    @org.junit.Test
+    @Test
     public void testStopWatch() {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -37,16 +41,16 @@ public class LangsTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testDateUtils() {
 
-        Assert.assertTrue(DateUtils.isSameDay(new Date(), new Date()));
+        assertTrue(DateUtils.isSameDay(new Date(), new Date()));
         //  assertTrue(DateUtils.getMillisPerUnit(Calendar.MINUTE)==3600);
 
 
     }
 
-    @org.junit.Test
+    @Test
     public void testArrayUtils() {
 
         String[][] colorsString = {
@@ -54,11 +58,11 @@ public class LangsTest {
                 {"GREEN", "#00FF00"},
                 {"BLUE", "#0000FF"}
         };
-        Assert.assertTrue(ArrayUtils.isNotEmpty(colorsString));
+        assertTrue(ArrayUtils.isNotEmpty(colorsString));
         System.out.println("colorsString = " + ArrayUtils.toString(colorsString));
 
         Map colorMap = ArrayUtils.toMap(colorsString);
-        Assert.assertTrue(colorMap.size() == 3);
+        assertTrue(colorMap.size() == 3);
 
         Object[] colors = colorMap.keySet().toArray();
         ArrayUtils.add(colors, "");
@@ -67,123 +71,84 @@ public class LangsTest {
         System.out.println("NULL_OBJECT_ARRAY = " + ArrayUtils.toString(null, "is null"));
     }
 
-    @org.junit.Test
+    @Test
     public void testStringUtils() {
         boolean isOk = true;
         String[] colorsString = StringUtils.split("RED #FF0000 RED #FF0000 GREEN #00FF00 BLUE #0000FF");
-        Assert.assertTrue(ArrayUtils.isNotEmpty(colorsString));
+        assertTrue(ArrayUtils.isNotEmpty(colorsString));
         System.out.println("colorsString = " + ArrayUtils.toString(colorsString));
         StringUtils.split("ab:cd:ef", ":", 2);    //["ab", "cd:ef"]
         StringUtils.splitByCharacterType("number5");//["number", "5"]
         StringUtils.splitByCharacterType("fooBar");//["foo", "B", "ar"]
         StringUtils.splitByCharacterType("foo200Bar");//["foo", "200", "B", "ar"]
-        Assert.assertTrue(StringUtils.countMatches("abba", "a") == 2);
-        Assert.assertTrue(isOk);
+        assertTrue(StringUtils.countMatches("abba", "a") == 2);
+        assertTrue(isOk);
     }
 
-    @org.junit.Test
+    @Test
     public void testSystemUtils() {
         boolean isOk = true;
         System.out.println("getJavaHome() " + SystemUtils.getJavaHome());
         System.out.println("getJavaIoTmpDir " + SystemUtils.getJavaIoTmpDir());
         System.out.println("getUserHome() " + SystemUtils.getUserHome());
         System.out.println("getUserDir() " + SystemUtils.getUserDir());
-        Assert.assertTrue(SystemUtils.IS_JAVA_1_4);
-        Assert.assertTrue(isOk);
+        assertTrue(SystemUtils.IS_JAVA_1_6);
+        assertTrue(isOk);
     }
 
-    @org.junit.Test
-    public void testReflectMetodUtils() {
+    @Test
+    public void testReflectMetodUtils() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         boolean isOk = true;
-        try {
-            Object o = MethodUtils.invokeMethod("String", "length", null);
-            Assert.assertNotNull(o);
-            System.out.println("lenth = " + o);
-
-        } catch (NoSuchMethodException e) {
-            isOk = false;
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IllegalAccessException e) {
-            isOk = false;
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InvocationTargetException e) {
-            isOk = false;
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        Assert.assertTrue(isOk);
+        Object o = MethodUtils.invokeMethod("String", "length", null);
+        Assert.assertNotNull(o);
+        System.out.println("lenth = " + o);
     }
 
-    @org.junit.Test
-    public void testReflectConstructorUtils() {
-        boolean isOk = true;
-        try {
-            Object o = ConstructorUtils.invokeConstructor(Integer.class, "12");
-            Assert.assertNotNull(o);
-            Assert.assertTrue((Integer) o == 12);
-            System.out.println("lenth = " + o);
-
-        } catch (NoSuchMethodException e) {
-            isOk = false;
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IllegalAccessException e) {
-            isOk = false;
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InvocationTargetException e) {
-            isOk = false;
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InstantiationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            isOk = false;
-        }
-        Assert.assertTrue(isOk);
+    @Test
+    public void testReflectConstructorUtils() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Object o = ConstructorUtils.invokeConstructor(Integer.class, "12");
+        Assert.assertNotNull(o);
+        assertTrue((Integer) o == 12);
+        System.out.println("lenth = " + o);
     }
 
-    @org.junit.Test
+    @Test
     public void testReflectFieldUtils() {
-        boolean isOk = true;
         Object o = FieldUtils.getDeclaredField(this.getClass(), "log", true);
         Assert.assertNotNull(o);
         System.out.println("o = " + o);
-
-
-        Assert.assertTrue(isOk);
     }
 
-    @org.junit.Test
+    @Test
     public void testMahtFraction() {
-        boolean isOk = true;
         Fraction o = Fraction.getFraction("1/2");
         Assert.assertNotNull(o);
         System.out.println("o = " + o);
-        Assert.assertTrue(o.doubleValue() == 0.5d);
+        assertTrue(o.doubleValue() == 0.5d);
 
-        Assert.assertTrue(isOk);
     }
 
-    @org.junit.Test
+    @Test
     public void testBuilderEqualsBuilder() {
-        boolean isOk = true;
-        FIO fio2 = new FIO("œÛÔÒ", "œÂ‚˚È", "œÓÒÎÂ‰ÌËÈ");
+        FIO fio2 = new FIO("–ü—É–ø—Å", "–ü–µ—Ä–≤—ã–π", "–ü–æ—Å–ª–µ–¥–Ω–∏–π");
         fio2.setLastName("Xxx");
         System.out.println("fio2 = " + fio2.hashCode() + " " + fio2);
-        FIO fio3 = new FIO("Xxx", "œÂ‚˚È", "œÓÒÎÂ‰ÌËÈ");
+        FIO fio3 = new FIO("Xxx", "–ü–µ—Ä–≤—ã–π", "–ü–æ—Å–ª–µ–¥–Ω–∏–π");
         System.out.println("fio3 = " + fio3.hashCode() + " " + fio3);
-        Assert.assertFalse(fio2.equals(fio3));
-        Assert.assertTrue(EqualsBuilder.reflectionEquals(fio2, fio3));
-
-        Assert.assertTrue(isOk);
+        assertNotEquals(fio2, fio3);
+        assertTrue(EqualsBuilder.reflectionEquals(fio2, fio3));
     }
 
     private class FIO {
         private String lastName, s1, s2;
 
-        public FIO(String lastName, String s1, String s2) {
+        FIO(String lastName, String s1, String s2) {
             this.lastName = lastName;
             this.s1 = s1;
             this.s2 = s2;
         }
 
-        public void setLastName(String lastName) {
+        void setLastName(String lastName) {
             this.lastName = lastName;
         }
     }
