@@ -10,6 +10,7 @@ import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.commons.lang.reflect.MethodUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang.time.StopWatch;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,6 +29,7 @@ import static org.junit.Assert.assertTrue;
  * test fore org.apache.commons.lang package
  */
 public class LangsTest {
+    private final static Logger log = Logger.getLogger(LangsTest.class);
 
     @Test
     public void testStopWatch() {
@@ -92,7 +94,8 @@ public class LangsTest {
         System.out.println("getJavaIoTmpDir " + SystemUtils.getJavaIoTmpDir());
         System.out.println("getUserHome() " + SystemUtils.getUserHome());
         System.out.println("getUserDir() " + SystemUtils.getUserDir());
-        assertTrue(SystemUtils.IS_JAVA_1_6);
+//        assertTrue(SystemUtils.IS_JAVA_1_6);
+        assertTrue(SystemUtils.IS_JAVA_1_7); //maven use 1.7 in system
         assertTrue(isOk);
     }
 
