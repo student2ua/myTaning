@@ -1,28 +1,9 @@
 package com.tor.net.ssl;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
-import java.security.UnrecoverableKeyException;
+
+import javax.net.ssl.*;
+import java.io.*;
+import java.security.*;
 import java.security.cert.CertificateException;
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLServerSocket;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
 /**
  * User: tor
  * Date: 05.12.13
@@ -53,7 +34,7 @@ public class SSLClient {
             SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG", "SUN");
 
             // Создание SSL контекста
-            SSLContext sslContext = SSLContext.getInstance("SSLv3");
+            SSLContext sslContext = SSLContext.getInstance("SSLv3");    // need "TLSv1.2" ."TLS" On Java 8 and below, you also get SSLv3
             sslContext.init(keyManagers, trustManagers, secureRandom);
 
             // Создание фабрики SSL сокетов.
