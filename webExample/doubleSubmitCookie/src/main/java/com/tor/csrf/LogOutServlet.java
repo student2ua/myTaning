@@ -18,6 +18,7 @@ public class LogOutServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
         Cookie loginCookie = null;
+//        Cookie csrfCookie=null;
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -31,8 +32,14 @@ public class LogOutServlet extends HttpServlet {
             loginCookie.setMaxAge(0);
             resp.addCookie(loginCookie);
         }
-        final HttpSession session = req.getSession();
+        final HttpSession session = req.getSession(false);
         session.setAttribute(LoginServlet.CSRF_PARAM_NAME, null);
+        session.setAttribute(LoginServlet.CSRF_SESION_ATRR, null);
         resp.sendRedirect("login.jsp");
+
+        /*req.logout();
+        if (session != null) {
+            session.invalidate();
+        }*/
     }
 }

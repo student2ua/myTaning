@@ -5,6 +5,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -17,10 +20,10 @@ import java.util.concurrent.TimeUnit;
 @WebServlet("/LoginCheck")
 public class LoginServlet extends HttpServlet {
 
-    protected static final String login = "testuser";
-    protected static final String PASS = "qwerty";
-    protected static final String CSRF_PARAM_NAME = "doubleSubCookie";
-//    public static final String CSRF_SESION_ATRR = "csrfToken";
+    static final String login = "testuser";
+    private static final String PASS = "qwerty";
+    static final String CSRF_PARAM_NAME = "doubleSubCookie";
+    static final String CSRF_SESION_ATRR = "csrfToken";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,11 +43,30 @@ public class LoginServlet extends HttpServlet {
                 Cookie doubleSubCookie = new Cookie(CSRF_PARAM_NAME, storedSubCookie);
                 doubleSubCookie.setMaxAge((int) TimeUnit.MINUTES.toSeconds(30));
                 resp.addCookie(doubleSubCookie);
+                Cookie secretCookie=new Cookie(CSRF_SESION_ATRR,hashAndSalt(storedSubCookie,login.getBytes()));//as sample use uuid  as salt  idOne.toString().getBytes()
+                secretCookie.setMaxAge((int) TimeUnit.MINUTES.toSeconds(30));
+//                secretCookie.setSecure(true);   in real life
+                secretCookie.setHttpOnly(true);
+                resp.addCookie(secretCookie);
             }
             resp.sendRedirect("form.jsp");
         } else {
             resp.sendRedirect("error.jsp");
         }
+    }
+
+    public static String hashAndSalt(String stringToHash, byte[] salt) {
+        MessageDigest messageDigest = null;
+        String stringHash=null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256"); //SHA-1 - 160-bit  ?
+            messageDigest.update(salt);
+            stringHash= new BigInteger(1,messageDigest.digest(stringToHash.getBytes())).toString(16); //hex
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return stringHash;
     }
 
     private String generateCSRFToken() {

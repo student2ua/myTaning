@@ -23,8 +23,8 @@ public class HomeServlet extends HttpServlet {
         Cookie[] cookies = req.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(LoginServlet.CSRF_PARAM_NAME)) {
-                    if (token != null && token.equals(cookie.getValue())) {
+                if (cookie.getName().equals(LoginServlet.CSRF_SESION_ATRR)) {
+                    if (token != null && LoginServlet.hashAndSalt(token,LoginServlet.login.getBytes()).equals(cookie.getValue())) {
                         final PrintWriter writer = resp.getWriter();
                         writer.print("<script language='JavaScript'>alert('Success');</script>");
                     } else {
