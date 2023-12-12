@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Не нужно блокировать кнопки</title>
+    <style type="text/css">
+        [data-submitting] button {
+            opacity: 0.5;
+
+        }
+    </style>
+</head>
+<body>
+<p>Не нужно блокировать кнопки https://habr.com/ru/companies/productivity_inside/articles/775648/</p>
+<form action="#" autocomplete="on" id="form-simple">
+    <h1>Log in</h1>
+
+    <p>
+        <label for="username" class="uname" data-icon="u"> Your email or username </label>
+        <input id="username" name="username" required="required" type="text"
+               placeholder="myusername or mymail@mail.com"/>
+    </p>
+
+    <p>
+        <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+        <input id="password" name="password" required="required" type="password"
+               placeholder="eg. X8df!90EO"/>
+    </p>
+
+    <p class="login button">
+        <input type="submit" value="Login"/>
+    </p>
+</form>
+<script>
+    function noise() {
+        var count = Math.random() * 123000000; // какая-то нагрузка
+        for(var i=0;i<count;i++)
+        {
+            var tmp = Math.random(); // просто для нагрузки
+        }
+        var time = 50*1000;
+        setTimeout(noise, time);
+    }
+    let form = document.getElementById('form-simple');
+    form.addEventListener('submit', function (event) {
+
+        // Don't let the form reload the page
+        event.preventDefault();
+
+        // If the form is already submitting, do nothing
+        if (form.hasAttribute('data-submitting')) return;
+
+        // Add the [data-submitting] attribute to stop multiple submissions
+        form.setAttribute('data-submitting', '');
+
+        // Do more form stuff...
+        console.log("form submit - go")
+        noise();
+        setTimeout(function() {
+            console.log('text');
+        },5000);
+        console.log("form submit - end")
+        // Remove the [data-submitting] attribute
+        form.removeAttribute('data-submitting');
+
+    })
+    </script>
+
+</body>
+</html>
