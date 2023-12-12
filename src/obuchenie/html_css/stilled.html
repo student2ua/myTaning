@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>https://habr.com/ru/companies/ruvds/articles/779814/</title>
+    <style type="text/css">
+        input#example1 {
+            appearance: none;
+            position: relative;
+            display: inline-block;
+            background: lightgray;
+            height: 1.65rem;
+            width: 2.75rem;
+            vertical-align: middle;
+            border-radius: 2rem;
+            box-shadow: 0px 1px 3px #0003 inset;
+            transition: 0.25s linear background;
+        }
+
+        input#example1::before {
+            content: "";
+            display: block;
+            width: 1.25rem;
+            height: 1.25rem;
+            background: #fff;
+            border-radius: 1.2rem;
+            position: absolute;
+            top: 0.2rem;
+            left: 0.2rem;
+            box-shadow: 0px 1px 3px #0003;
+            transition: 0.25s linear transform;
+            transform: translateX(0rem);
+        }
+
+        input#example1:focus {
+            outline: none;
+        }
+        input#example1:focus-visible {
+            outline: 2px solid dodgerblue;
+            outline-offset: 2px;
+        }
+
+        #example1:checked {
+            background: green;
+        }
+
+        #example1:checked::before {
+            transform: translateX(1rem);
+        }
+
+        summary::marker {
+            font-size: 1.5em;
+            content: "📬";
+        }
+
+        [open] summary::marker {
+            font-size: 1.5em;
+            content: "📬";
+        }
+        dialog::backdrop{
+            background: #fff5;
+           backdrop-filter: blur(4px);
+        }
+        .field_with_errors {
+            display: inline;
+            color: red;
+        }
+        .field_with_errors input+span:after {
+            content: "*"
+        }
+    </style>
+</head>
+<body>
+<h3>Собственные переключатели</h3>
+<label>
+    <input id="example1" type="checkbox"/>
+    My awesome feature
+</label>
+<p>Когда браузер рендерит HTML и находит заменяемый контент, он оставляет для него прямоугольник, а затем заменяет этот
+    прямоугольник настоящим контентом. Именно поэтому, например, изображения и элементы форм не имеют псевдоэлементов:
+    они заменяются, когда браузер заменяет весь элемент.
+    <strong>appearance</strong> приказывает браузеру не делать этого. Это правило говорит браузеру: «Спасибо, но я хочу
+    стилизовать собственный элемент управления формой». И это позволяет нам затем использовать псевдоэлемент ::before.
+    Сам input теперь становится фоном для нашего переключателя, а псевдоэлемент ::before — это маленькая точка внутри
+    него, выполняющая переключение.</p>
+
+<h3>Datalist с нативным автозаполнением</h3>
+<input list="frameworks"/>
+<datalist id="frameworks">
+    <option>Bootstrap</option>
+    <option>Tailwind CSS</option>
+    <option>Foundation</option>
+    <option>Bulma</option>
+    <option>Skeleton</option>
+</datalist>
+<p>Если пользователь теперь будет печатать в поле ввода, то браузер отобразит datalist в виде раскрывающегося списка,
+    автоматически фильтруя варианты при вводе. Однако так как это обычный input, пользователи всё равно могут вводить
+    собственные значения. Также они могут просмотреть список всех вариантов, нажав на поле ввода и перемещаясь по списку
+    при помощи клавиш со стрелками, или нажав на добавленный браузером значок раскрывающегося списка.</p>
+
+<h3>Аккордеоны</h3>
+<details>
+    <summary>My accordion</summary>
+    <p>Content 1</p>
+</details>
+
+<h3> Модальные диалоговые окна</h3>
+<button>test button</button>
+<dialog>
+    <form method="dialog">
+        <h3><font color="#3AC1EF"> This is a pretty dialog</font></h3>
+        <p>Tabs or space?</p>
+        <button type="submit" value="wrong">Tabs</button>
+        <button type="submit" value="correct">Spaces</button>
+    </form>
+</dialog>
+<h3> Can I use a :before or :after pseudo-element on an input field?</h3>
+<div class="field_with_errors">Label:</div>
+<div class="field_with_errors">
+    <input type="text" /><span></span>
+</div>
+</body>
+<script>
+    document.querySelector("button").addEventListener("click", () => {
+        document.querySelector("dialog").showModal();
+    });
+    let dialog = document.querySelector("dialog");
+    dialog.addEventListener("close", function () {
+        console.log(dialog.returnValue);
+    });
+</script>
+</html>
