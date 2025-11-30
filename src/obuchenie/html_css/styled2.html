@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript, отдохни! Делаем интерактивные вещи на HTML и CSS
+        https://habr.com/ru/companies/reksoft/articles/950918/</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        main {
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #f2f2f2;
+            height: 60px;
+        }
+
+        p {
+            scroll-margin-top: 60px
+        }
+
+        @keyframes target {
+            0% {
+                color: inherit
+            }
+            25%, 75% {
+                color: blue
+            }
+            100% {
+                color: inherit
+            }
+        }
+
+        p:target {
+            animation: target 2s linear forwards;
+        }
+
+        p.demo-tooltip {
+            margin-inline: auto;
+            max-width: max-content;
+
+            position: relative;
+        }
+
+        p.demo-tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background-color: #fff;
+            left: 50%;
+            top: 100%;
+            transform: translate(-50%, -4px);
+            min-width: 200px;
+            border-radius: 4px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            opacity: 0;
+            transition: all .3s linear;
+        }
+
+        p.demo-tooltip:hover::after {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        dialog {
+            border: none;
+            border-radius: 10px;
+            padding: 30px 40px;
+            /*min-width: min(100%, 600px);*/
+            min-width: min(50ch, 90 dvi);
+
+            opacity: 0;
+            transform: translate(0, 50px);
+            transition: all .3s linear;
+        }
+
+        dialog[open] {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        dialog::backdrop {
+            /*background-color: rgba(0, 0, 0, 0.7); */
+            background: color-mix(in srgb, green, transparent 20%)
+        }
+        dialog {
+        > footer {
+            display: flex;
+            justify-content: end;
+        }
+        }
+
+        @starting-style {
+            dialog[open] {
+                opacity: 0;
+                transform: translate(0, 50px);
+            }
+        }
+
+        .carousel {
+            padding: 20px 0;
+            display: flex;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: auto;
+            overscroll-behavior-x: none;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-item {
+            flex: 0 0 400px;
+            height: 380px;
+            border-radius: 16px;
+            background-color: #f2f2f2;
+            scroll-snap-align: start;
+        }
+
+        :root {
+            color-scheme: light dark;
+            --text-color: light-dark(#000000, #FFFFFF);
+            --background-color: light-dark(#FFFFFF, #000000);
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        body:has(input#light:checked) {
+            color-scheme: light;
+        }
+
+        body:has(input#dark:checked) {
+            color-scheme: dark;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>Я sticky-шапка</header>
+    <article>
+        <a href="#1">Прокрутить до первого параграфа</a> <br>
+        <a href="#2">Прокрутить до второго параграфа</a>
+        <p id="1">
+            Жизнь в большом городе зачастую накладывает на людей очень много обязательств, которые многим мешают
+            планировать свое время. Поэтому времени катастрофически не хватает на все, в том числе и на нормальную
+            здоровую пищу. Полезные продукты необходимо включать в рацион каждый день: они богаты аминокислотами,
+            витаминами, микро- и макроэлементами, жирными кислотами, клетчаткой. На самом деле мы боремся не за вкус
+            еды, а со своей ленью, потому что нам очень удобно купить полуфабрикаты или готовые продукты, чтобы быстрее
+            приготовить.</p>
+
+        :~: — это последовательность символов, известная как директива фрагмента, она сообщает браузеру, что далее
+        следует одна или несколько инструкций,
+
+        text= — это текстовая директива, предоставляет браузеру текст, который должен быть связан с документом,
+
+        textStart (необязательный) — указывает на начало связанного текста,
+
+        textEnd (необязательный) — указывает на конец связанного текста,
+        <p id="2">В европейских странах вопрос о здоровом питании был поднят давно, и в немецкой, французской,
+            итальянской, греческой кухнях представлено большое количество блюд, которые смело можно отнести к полезной
+            пище. У каждого, кто любит возиться на кухне, есть масса маленьких секретов, которые доводят простые блюда
+            до совершенства. Учеными было потрачено много лет, чтобы установить, какие продукты и когда нужно есть,
+            чтобы всегда быть стройным и здоровыми. Прежде всего стоит сказать, что люди часто путают диетическую и
+            обезжиренную пищу с полезной.</p>
+    </article>
+    <article>
+        <h4>dialog modal</h4>
+        <button onclick="dialog.showModal()">Открыть модалку</button>
+
+        <dialog id="dialog"><h2>Я - модалка</h2>
+           <!-- <header>
+
+            </header>-->
+            <div class="dialog-content">
+                <ul>
+                    <li>showModal() — показывает диалог, как модальное окно с фоном (backdrop)</li>
+                    <li>show() — показывает диалог, как модальное окно</li>
+                    <li>close() — закрыть диалог, можно также передать возвращаемое значение.</li>
+                </ul>
+                Чтобы расширить возможности закрытия HTML-элемента dialog можно указать различные значения атрибута
+                closedby:
+                <ul>
+                    <li>any — закрывать по клику на backdrop и по нажатию на клавишу Esc, либо через указание явного
+                        механизма закрытия (вызов метода, вызов submit на форме внутри)
+                    </li>
+                    <li>none — закрыть модальное окно можно только через явное указание механизма закрытия</li>
+                    <li>closerequest — является значением по умолчанию, закрывается по нажатию на клавишу Esc, либо
+                        через указание явного механизма закрытия
+                    </li>
+                </ul>
+            </div>
+            <footer>
+                <form method="dialog">
+                    <button autofocus>Закрыть модалку</button>
+                </form>
+            </footer>
+        </dialog>
+        <p> Для стилизации элемента мы можем стилизовать и backdrop самого диалога. Для этого у нас есть псевдоэлемент
+            ::backdrop, а также сам элемент имеет псевдокласс :open. Если браузер не поддерживает псевдокласс
+            :open (например мобильный Safari), то можно стилизовать через наличие атрибута dialog[open]. Для реализации
+            плавного появления элемента, нам может помочь правило @starting-style и немного анимаций
+        </p>
+    </article>
+    <article>
+        <p class="demo-tooltip" data-tooltip="Текст внутри тултипа">Элемент</p>
+    </article>
+    <article>
+        <h4>Popover API</h4>
+        <div id="popover123" popover>Я поповер
+            <button popovertarget="popover123" popovertargetaction="hide">hide</button>
+        </div>
+        <button popovertarget="popover123">Открыть поповер</button>
+
+        <p>
+            Атрибут popover превращает элемент в поповер, которому нужно задать уникальный идентификатор. Кнопке нужно
+            добавить атрибут popovertarget, значением атрибута является идентификатор элемента, который будет
+            открываться.
+        </p>
+        <p>
+            Также, как и у
+            dialog, у элемента с атрибутом popover есть псевдоэлемент ::backdrop и псевдокласс :popover-open. Это даёт
+            достаточно возможностей для стилизации вместе с использованием вышеупомянутого правила @starting-style.
+        </p>
+        <p>Popover API поддерживает различные типы поведения:</p>
+        <ul>
+            <li>auto — значение по умолчанию, поповер закрывается по клику вне области, либо по нажатию на Esc</li>
+            <li>manual — поповер закрывается только программно через специальные атрибуты</li>
+        </ul>
+        <p>Атрибут popovertargetaction принимает следующие значения:</p>
+        <ul>
+            <li>show — открывает поповер</li>
+            <li>hide — закрывает поповер</li>
+            <li>toggle — переключает состояние</li>
+        </ul>
+    </article>
+
+    <article>
+        <h4>Carousel</h4>
+        <div class="carousel">
+            <div class="carousel-item">
+                <p>Чтобы наши элементы выстроились в один ряд, лучше всего использовать свойство display со значением
+                    flex или grid</p>
+                <p>свойство align-items со значением stretch мы растягиваем все дочерние элементы по высоте, а свойство
+                    gap определяет отступы между карточками, без необходимости убирать этот отступ у последней карточки,
+                    если бы мы использовали margin-right. Свойство overflow со значением auto добавляет в наш элемент
+                    скролл, если есть такая необходимость.</p>
+            </div>
+            <div class="carousel-item">
+                Свойство overscroll-behavior-x определяет поведение браузера при достижении конца горизонтальной
+                прокрутки, оно принимает следующие значения:
+                <ul>
+                    <li>auto — поведение по умолчанию, вы можете заметить, если вы прокручиваете контент внутри
+                        модального окна и контент заканчивается, браузер может начать прокручивать страницу
+                    </li>
+                    <li>contain — поведение, которое не передает прокрутку на другие элементы, а поведение при
+                        переполнении прокрутки возникает только на текущем элементе
+                    </li>
+                    <li>none — цепочка прокрутки не распространяется на соседние области прокрутки, а поведение при
+                        переполнении по умолчанию не используется
+                    </li>
+                </ul>
+            </div>
+            <div class="carousel-item">
+                Свойство scroll-snap-type - свойство определяющее направление и строгость привязки прокрутки внутри
+                контейнера.
+                Принимает следующие значения:
+                <ul>
+                    <li>x — привязка по горизонтальной оси</li>
+                    <li>y — привязка по вертикальной оси</li>
+                    <li>inline — привязка по линейной оси</li>
+                    <li>block — привязка по оси блока</li>
+                    <li>both — контейнер привязывается к фиксированным позициям по обеим осям независимо друг от друга
+                    </li>
+                    <li>mandatory — область просмотра этого контейнера с прокруткой должна фиксироваться в определённом
+                        положении, если в данный момент прокрутка не выполняетсяа
+                    </li>
+                    <li>proximity — область просмотра этого контейнера с прокруткой может фиксироваться в определённом
+                        положении, если в данный момент прокрутка не выполняется. Браузер сам определяет, будет ли
+                        выполняться фиксация, на основе параметров прокрутки.
+                    </li>
+                </ul>
+            </div>
+            <div class="carousel-item">
+                Свойство scroll-snap-align определяет положение привязки блока как выравнивание его области привязки.
+                Оно принимает следующие значения:
+                <ul>
+                    <li>start — выравнивать по началу элемента</li>
+                    <li>center — выравнивать посередине элемента</li>
+                    <li>end — выравнивать по концу элемента</li>
+                    <li> none — не указано положение привязки по этой оси</li>
+                </ul>
+            </div>
+        </div>
+    </article>
+    <article>
+        <h4>Реализация светлой и тёмной темы</h4>
+        <label>
+            <input type="radio" id="light" value="light" name="theme-toggle"/>
+            Светлая тема
+        </label>
+        <label>
+            <input type="radio" id="dark" value="dark" name="theme-toggle"/>
+            Темная тема
+        </label>
+
+    </article>
+</main>
+</body>
+</html>
