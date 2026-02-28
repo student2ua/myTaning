@@ -1,10 +1,13 @@
 package com.tor.swing;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -162,4 +165,48 @@ public class SwingUtil {
         if (wasExpanded) expandTree(++level, tree);
     }
 
+    /**<pre>
+     * // после какого-то действия, например после выбора файла
+     JOptionPane.showMessageDialog(this, "Файл успешно загружен!\nТеперь нажмите «Далее»");
+
+     // акцентируем кнопку
+     blinkButtonBorder(btnNext, 3, 300);   // 3 раза, каждое мигание 300 мс
+     </> */
+    public static void blinkButtonBorder(final JButton button, int times, int delayMs) {
+        if (button == null) return;
+
+        final Border originalBorder = button.getBorder();
+        final Border highlightBorder = BorderFactory.createLineBorder(new Color(255, 80, 0), 3); // яркий оранжевый
+
+        final Timer timer = new Timer(delayMs, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // переключаем бордер
+                if (button.getBorder() == originalBorder) {
+                    button.setBorder(highlightBorder);
+                } else {
+                    button.setBorder(originalBorder);
+                }//To change body of implemented methods use File | Settings | File Templates.
+            }
+        });
+
+        timer.setRepeats(true);
+        timer.setInitialDelay(0);
+
+        // Сколько раз мигнём (каждое мигание = два переключения: on → off)
+        int totalTicks = times * 2;
+
+        Timer stopTimer = new Timer(delayMs * totalTicks + 100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+                timer.stop();
+                button.setBorder(originalBorder);           // обязательно возвращаем оригинал
+                ((Timer) ev.getSource()).stop();
+            }
+        });
+        stopTimer.setRepeats(false);
+
+        timer.start();
+        stopTimer.start();
+    }
 }
