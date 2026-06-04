@@ -18,6 +18,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <optimize>true</optimize>
+                    <source>6</source>
+                    <target>6</target>
                 </configuration>
             </plugin>
         </plugins>
